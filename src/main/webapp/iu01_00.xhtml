@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style>
+body {
+	background-color: #4ECDC4;
+	margin: 0px;
+}
+
+.margin {
+	margin-top: 10px;
+	margin: a
+}
+
+.ui-wizard-nav-back,.ui-wizard-nav-next{
+	background-color: #FFD60A;
+}
+
+.ui-wizard-nav-back{
+	margin-left: 150px;
+}
+
+.ui-wizard-nav-next{
+	margin-right: 200px;
+}
+
+.ui-wizard-step-title {
+	background-color:white;
+	border-color: white;
+	margin-left: 40px;
+}
+
+.div-branca {
+	float: right;
+	width: 30vw;
+	height: 100vh;
+	border-radius: 10px 0px 0xp 10px;
+	background-color: white;
+}
+
+.ui-wizard-content {
+ margin-left: 100px
+}
+</style>
+	<title>Bem-Vindo ao Kid$</title>
+</h:head>
+<h:body>
+	<h:form id="idform">
+		<div style="float: left; width: 60vw; height: 100hv">
+			<img src="images/logo.png"
+				style="width: 120px; height: 100px; margin: 10px" />
+		</div>
+        <p:growl id="growl" sticky="true" showDetail="true"/>
+
+		<div class="div-branca">
+			<p:wizard flowListener="#{iu01_00MBean.onFlowProcess}">
+				<p:tab id="personal" title="Cadastro">
+					<p:messages />
+					<h:panelGrid columns="1" columnClasses="label, value">
+						<div style="width: 200px" class="margin">
+							<p:outputLabel value="Nome" for="nome" />
+							<p:inputText id="nome" value="#{iu01_00MBean.nome}" />
+						</div>
+
+						<div style="width: 200px" class="margin">
+							<p:outputLabel value="Email" for="email" />
+							<p:inputText id="email" value="#{iu01_00MBean.email}" />
+						</div>
+
+						<div style="width: 200px" class="margin">
+							<p:outputLabel value="Senha" for="senha" />
+							<p:inputText id="senha" value="#{iu01_00MBean.senha}" />
+						</div>
+
+						<div style="width: 200px" class="margin">
+							<p:outputLabel value="Data de Nascimento" for="nasc" />
+							<p:datePicker id="nasc" value="#{iu01_00MBean.dataNasc}" />
+						</div>
+					</h:panelGrid>
+				</p:tab>
+
+				<p:tab id="confirm" title="Confirmation">
+					<h:panelGrid id="confirmation" columns="1"
+						columnClasses="grid,grid,grid">
+						<div style="width: 200px" class="margin">
+							<p:outputLabel value="É responsavel" for="resp" />
+							<p:inputText id="resp" value="#{iu01_00MBean.responsavel}" />
+						</div>
+						<p:commandButton value="RESPONSAVEL" id="responsavel" action="#{iu01_00MBean.onSalvarResponsavel()}"/>
+					</h:panelGrid>
+
+				</p:tab>
+			</p:wizard>
+		</div>
+	</h:form>
+</h:body>
+</html>

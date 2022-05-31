@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style>
+body {
+	background-color: #4ECDC4;
+	margin: 0px;
+}
+
+.button {
+	border-radius: 60px;
+	background-color: #FFD60A;
+	border-color: #FFD60A;
+	height: 100px;
+	width:100px;
+	background-image: url(.../images/seta.png) !important;
+}
+</style>
+	<title>Bem-Vindo ao Kid$</title>
+</h:head>
+<h:body>
+	<h:form id="idform">
+
+
+		<div style="float: left; width: 100vw; height: 100hv">
+			<div style="float: left; width: 40vw; height: 100vh;">
+				<div style="height: 40vh;">
+					<img src="images/logo.png"
+						style="width: 120px; height: 100px; margin: 10px;" />
+				</div>
+				<div style="height: 60vh; align-content: flex-end;">
+					<img src="images/Imagem1.png" style="width: 500px;" />
+				</div>
+			</div>
+			<div style="float: right; width: 60vw; height: 100vh;">
+				<div style="width: 60vw; height: 75vh;">
+					<img src="images/Imagem2.png"
+						style="width: 450px; margin: 30px 100px 0px 50px; float: right;" />
+				</div>
+				<div style="width: 60vw; float: right;">
+					<p:commandButton action="#{indexMBean.encaminhar()}" styleClass="button" style="float: right; margin-right:100px;"/>
+				</div>
+			</div>
+		</div>
+	</h:form>
+</h:body>
+</html>
