@@ -7,10 +7,11 @@ import factory.Factory;
 import modelos.Crianca;
 import modelos.Responsavel;
 import modelos.Sala;
+import modelos.Usuario;
 
 public class ManterResponsavel {
 
-	public void salvarResponsavel(Responsavel entidade) {
+	public void salvarResponsavel(Usuario entidade) {
 		EntityManager entityManager = Factory.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();

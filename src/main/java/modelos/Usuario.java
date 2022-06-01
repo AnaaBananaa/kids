@@ -36,7 +36,6 @@ public class Usuario implements Serializable{
 	private Boolean isResponsavel;
 	
 	@ManyToMany
-	@JoinColumn(name = "idsala")
 	private List<Sala> salas;
 	public Long getId() {
 		return id;

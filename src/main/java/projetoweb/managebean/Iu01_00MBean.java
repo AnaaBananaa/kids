@@ -19,13 +19,7 @@ import modelos.Usuario;
 @RequestScoped
 @ManagedBean
 public class Iu01_00MBean {
-
-	private String nome = "";
-	private String email = "";
-	private String senha = "";
-	private String confirmSenha= "";
-	private Date dataNasc;
-	private boolean isResponsavel;
+	private String confirmSenha;
 	private Responsavel user = new Responsavel();
 	private boolean skip;
 
@@ -36,16 +30,11 @@ public class Iu01_00MBean {
 	
 	public void onSalvarResponsavel() {
 		ManterResponsavel manterResp = new ManterResponsavel();
-		Responsavel resp = new Responsavel();
-		resp.setNome(nome);
-		resp.setEmail(email);
-		resp.setSenha(senha);
-		resp.setDataNascimento(dataNasc);
-		resp.setIsResponsavel(isResponsavel);
-		manterResp.salvarResponsavel(resp);
+		manterResp.salvarResponsavel(user);
 	}
 	
 	public void onSalvarCrianca() {
+		user.setIsResponsavel(true);
 		ManterUsuario<Usuario> manterUsuario = new ManterUsuario<Usuario>();
 	}
 	
@@ -66,30 +55,7 @@ public class Iu01_00MBean {
             return event.getNewStep();
         }
     }
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
+    
 	public String getConfirmSenha() {
 		return confirmSenha;
 	}
@@ -106,21 +72,6 @@ public class Iu01_00MBean {
 		this.user = user;
 	}
 
-	public Date getDataNasc() {
-		return dataNasc;
-	}
-
-	public void setDataNasc(Date dataNasc) {
-		this.dataNasc = dataNasc;
-	}
-
-	public boolean isResponsavel() {
-		return isResponsavel;
-	}
-
-	public void setResponsavel(boolean isResponsavel) {
-		this.isResponsavel = isResponsavel;
-	}
 	
 
 }

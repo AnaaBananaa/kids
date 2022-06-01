@@ -17,7 +17,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="Responsavel")
 public class Responsavel extends Usuario implements Serializable {
 
 	/**

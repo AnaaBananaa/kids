@@ -25,21 +25,11 @@ public class Sala implements Serializable {
 	
 	private String token;
 	
-	@ManyToMany
-	@JoinColumn(name = "idResponsavel")
-	private List<Responsavel> responsavel = new ArrayList<Responsavel>();
-	
 	public int getIdSala() {
 		return idSala;
 	}
 	public void setIdSala(int idSala) {
 		this.idSala = idSala;
-	}
-	public List<Responsavel> getResponsavel() {
-		return responsavel;
-	}
-	public void setResponsavel(List<Responsavel> responsavel) {
-		this.responsavel = responsavel;
 	}
 	
 	public String getToken() {
