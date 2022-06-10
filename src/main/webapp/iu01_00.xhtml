@@ -14,23 +14,23 @@ body {
 
 .margin {
 	margin-top: 10px;
-	margin: a
+	margin-left: 40px;
 }
 
-.ui-wizard-nav-back,.ui-wizard-nav-next{
+.ui-wizard-nav-back, .ui-wizard-nav-next {
 	background-color: #FFD60A;
 }
 
-.ui-wizard-nav-back{
+.ui-wizard-nav-back {
 	margin-left: 150px;
 }
 
-.ui-wizard-nav-next{
+.ui-wizard-nav-next {
 	margin-right: 200px;
 }
 
 .ui-wizard-step-title {
-	background-color:white;
+	background-color: white;
 	border-color: white;
 	margin-left: 40px;
 }
@@ -44,60 +44,79 @@ body {
 }
 
 .ui-wizard-content {
- margin-left: 100px
+	margin-left: 100px
 }
 </style>
 	<title>Bem-Vindo ao Kid$</title>
 </h:head>
 <h:body>
-	<h:form id="idform">
-		<div style="float: left; width: 60vw; height: 100hv">
-			<img src="images/logo.png"
-				style="width: 120px; height: 100px; margin: 10px" />
+<h:form id="idformLogin">
+	<p:growl id="growl" sticky="true" showDetail="true" />
+
+	<div style="float: left; width: 60vw; height: 100hv">
+		<img src="images/logo.png"
+			style="width: 120px; height: 100px; margin: 10px" />
+	</div>
+	<div class="div-branca">
+		<h:panelGrid columns="1" columnClasses="label, value">
+			<div style="width: 200px" class="margin">
+				<p:outputLabel value="Email" for="emailLogin" />
+				<p:inputText id="emailLogin" value="#{iu01_00MBean.user.email}" />
+			</div>
+
+			<div style="width: 200px" class="margin">
+				<p:outputLabel value="Senha" for="senhaLogin" />
+				<p:inputText id="senhaLogin" value="#{iu01_00MBean.user.senha}" />
+			</div>
+		</h:panelGrid>
+
+		<p:commandButton value="ENTRAR" id="entrar"
+			action="#{iu01_00MBean.onBuscarUsuario()}" />
+		<div class="p-col-2">
+			<p:divider>
+				<b>OR</b>
+			</p:divider>
 		</div>
-        <p:growl id="growl" sticky="true" showDetail="true"/>
 
-		<div class="div-branca">
-			<p:wizard flowListener="#{iu01_00MBean.onFlowProcess}">
-				<p:tab id="personal" title="Cadastro">
-					<p:messages />
-					<h:panelGrid columns="1" columnClasses="label, value">
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="Nome" for="nome" />
-							<p:inputText id="nome" value="#{iu01_00MBean.user.nome}" />
-						</div>
+		<p:wizard id="wizard" flowListener="#{iu01_00MBean.onFlowProcess}">
+			<p:tab id="personal" title="Cadastro" >
+				<p:messages />
+				<h:panelGrid columns="1" columnClasses="label, value">
+					<div style="width: 200px" class="margin">
+						<p:outputLabel value="Nome" for="nome" />
+						<p:inputText id="nome" value="#{iu01_00MBean.user.nome}" />
+					</div>
 
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="Email" for="email" />
-							<p:inputText id="email" value="#{iu01_00MBean.user.email}" />
-						</div>
+					<div style="width: 200px" class="margin">
+						<p:outputLabel value="Email" for="email" />
+						<p:inputText id="email" value="#{iu01_00MBean.user.email}" />
+					</div>
 
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="Senha" for="senha" />
-							<p:inputText id="senha" value="#{iu01_00MBean.user.senha}" />
-						</div>
+					<div style="width: 200px" class="margin">
+						<p:outputLabel value="Senha" for="senha" />
+						<p:inputText id="senha" value="#{iu01_00MBean.user.senha}" />
+					</div>
 
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="Data de Nascimento" for="nasc" />
-							<p:datePicker id="nasc" value="#{iu01_00MBean.user.dataNascimento}" />
-						</div>
-					</h:panelGrid>
-					<p:commandButton value="RESPONSAVEL" id="responsavel2" action="#{iu01_00MBean.onSalvarResponsavel()}"/>
-				</p:tab>
+					<div style="width: 200px" class="margin">
+						<p:outputLabel value="Data de Nascimento" for="nasc" />
+						<p:datePicker id="nasc"
+							value="#{iu01_00MBean.user.dataNascimento}" />
+					</div>
+				</h:panelGrid>
+			</p:tab>
 
-				<p:tab id="confirm" title="Confirmation">
-					<h:panelGrid id="confirmation" columns="1"
-						columnClasses="grid,grid,grid">
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="É responsavel" for="resp" />
-							<p:inputText id="resp" value="#{iu01_00MBean.user.isResponsavel}" />
-						</div>
-						<p:commandButton value="RESPONSAVEL" id="responsavel" action="#{iu01_00MBean.onSalvarResponsavel()}"/>
-					</h:panelGrid>
+			<p:tab id="confirm" title="Confirmation">
+				<h:panelGrid id="confirmation" columns="1"
+					columnClasses="grid,grid,grid">
+					<p:commandButton value="RESPONSAVEL" id="responsavel"
+						action="#{iu01_00MBean.onSalvarResponsavel()}" />
+					<p:commandButton value="CRIANÇA" id="crianca"
+						action="#{iu01_00MBean.onSalvarCrianca()}" />
+				</h:panelGrid>
 
-				</p:tab>
-			</p:wizard>
-		</div>
-	</h:form>
+			</p:tab>
+		</p:wizard>
+	</div>
+</h:form>
 </h:body>
 </html>

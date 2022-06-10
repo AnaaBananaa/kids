@@ -5,11 +5,11 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<persistence-unit name="projetoweb">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>modelos.Usuario</class>
-		<class>modelos.Responsavel</class>
-		<class>modelos.Crianca</class>
-		<class>modelos.Sala</class>
-		<class>modelos.Tarefa</class>
+		<class>modelo.entity.Usuario</class>
+		<class>modelo.entity.Responsavel</class>
+		<class>modelo.entity.Crianca</class>
+		<class>modelo.entity.Sala</class>
+		<class>modelo.entity.Tarefa</class>
 		
 
 		<properties>
@@ -23,7 +23,7 @@
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 			<property name="hibernate.show_sql" value="true"/>
 			<property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>
-			<property name="hibernate.hbm2ddl.auto" value="create"/>
+<!-- 			<property name="hibernate.hbm2ddl.auto" value="create"/> -->
 		</properties>
 	</persistence-unit>
 </persistence>
