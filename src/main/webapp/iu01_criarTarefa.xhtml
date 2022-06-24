@@ -23,13 +23,27 @@ body {
 				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
 				url="iu01_criarTarefa.jsf" />
 			<p:menuitem value="CRIAR RECOMPENSA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}" url="iu01_criarRecompensa.jsf" />
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}" url="iu01_criarRecompensa.jsf"/>
 
 			<f:facet name="options">
 				<p:button value="Logout" icon="pi pi-fw pi-sign-out"
 					styleClass="ui-button-info" />
 			</f:facet>
 		</p:menubar>
+
+		<p:outputLabel value="NOME" for="nome" />
+		<p:inputText id="nome"
+			value="#{iu01_criarTarefaMBean.tarefa.nomeTarefa}" />
+
+		<p:outputLabel value="DESCRICAO" for="dsc" />
+		<p:inputText id="dsc"
+			value="#{iu01_criarTarefaMBean.tarefa.dscTarefa}" />
+
+		<p:outputLabel value="CUSTO" for="custo" />
+		<p:inputText id="custo" value="#{iu01_criarTarefaMBean.tarefa.koin}" />
+
+		<p:commandButton value="CRIAR TAREFA" id="tarefa"
+			action="#{iu01_criarTarefaMBean.onSalvarTarefa()}" />
 
 	</h:form>
 </h:body>

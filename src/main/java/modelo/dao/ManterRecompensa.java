@@ -4,19 +4,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import factory.Factory;
-import modelo.entity.Tarefa;
+import modelo.entity.Recompensa;
 import modelo.entity.UsuarioLogado;
 
-public class ManterTarefa {
-
-	public void salvarTarefa(Tarefa tarefa) {
+public class ManterRecompensa {
+	
+	public void salvarRecompensa(Recompensa recompensa) {
 		EntityManager entityManager = Factory.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
-		tarefa.setSala(UsuarioLogado.getInstance().getUsuario().getSalas().get(0));
-		entityManager.persist(tarefa);
+		recompensa.setSala(UsuarioLogado.getInstance().getUsuario().getSalas().get(0));
+		entityManager.persist(recompensa);
 		entityTransaction.commit();
 		entityManager.close();
 	}
-	
+
 }

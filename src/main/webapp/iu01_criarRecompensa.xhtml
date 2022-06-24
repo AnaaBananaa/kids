@@ -20,16 +20,25 @@ body {
 			<p:menuitem value="TAREFAS" icon="pi pi-fw pi-trash" />
 			<p:menuitem value="RECOMPENSAS" icon="pi pi-fw pi-trash" />
 			<p:menuitem value="CRIAR TAREFA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
-				url="iu01_criarTarefa.jsf" />
-			<p:menuitem value="CRIAR RECOMPENSA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}" url="iu01_criarRecompensa.jsf" />
-
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}" url="iu01_criarTarefa.jsf"/>
 			<f:facet name="options">
 				<p:button value="Logout" icon="pi pi-fw pi-sign-out"
 					styleClass="ui-button-info" />
 			</f:facet>
+			<p:menuitem value="CRIAR RECOMPENSA" rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"/>
 		</p:menubar>
+
+		<p:outputLabel value="NOME" for="nome" />
+		<p:inputText id="nome" value="#{iu01_criarRecompensaMBean.recompensa.nomeRecompensa}" />
+
+		<p:outputLabel value="DESCRICAO" for="dsc" />
+		<p:inputText id="dsc" value="#{iu01_criarRecompensaMBean.recompensa.descricao}" />
+
+		<p:outputLabel value="CUSTO" for="custo" />
+		<p:inputText id="custo" value="#{iu01_criarRecompensaMBean.recompensa.preco}" />
+		
+		<p:commandButton value="CRIAR RECOMPENSA" id="tarefa"
+			action="#{iu01_criarRecompensaMBean.onSalvarRecompensa()}" />
 
 	</h:form>
 </h:body>

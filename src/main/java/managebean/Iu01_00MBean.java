@@ -15,6 +15,7 @@ import modelo.dao.ManterUsuario;
 import modelo.entity.Crianca;
 import modelo.entity.Responsavel;
 import modelo.entity.Usuario;
+import modelo.entity.UsuarioLogado;
 
 @RequestScoped
 @ManagedBean
@@ -29,13 +30,15 @@ public class Iu01_00MBean {
 	private Usuario user = new Usuario();
 	private boolean skip;
 	private boolean cadastro;
+	private List<Responsavel> resp;
+	private List<Crianca> crianca;
 
 	@PostConstruct
 	public void init() {
 		System.out.println(" Bean 2 executado! ");
 		setCadastro(false);
 	}
-	
+
 	public void onSalvarResponsavel() {
 		userResp.setNome(user.getNome());
 		userResp.setDataNascimento(user.getDataNascimento());
@@ -45,51 +48,56 @@ public class Iu01_00MBean {
 		ManterUsuario manterResp = new ManterUsuario();
 		manterResp.salvarResponsavel(userResp);
 	}
-	
+
 	public void onSalvarCrianca() {
-		userCrianca.setDataNascimento(dataNasc);
-		userCrianca.setNome(nome);
-		userCrianca.setEmail(email);
-		userCrianca.setSenha(senha);
+		userCrianca.setDataNascimento(user.getDataNascimento());
+		userCrianca.setNome(user.getNome());
+		userCrianca.setEmail(user.getEmail());
+		userCrianca.setSenha(user.getSenha());
 		userCrianca.setIsResponsavel(false);
 		userCrianca.setKoin(0.00);
 		ManterUsuario manterUsuario = new ManterUsuario();
 		manterUsuario.salvarCrianca(userCrianca);
 	}
-	
+
 	public void onBuscarUsuario() throws Exception {
 		ManterUsuario manterUsuario = new ManterUsuario();
-		validaPagina(manterUsuario.onBuscarResp(getEmail(), getSenha()));
+		resp = manterUsuario.onBuscarResp(getEmail(), getSenha());
+		crianca = manterUsuario.onBuscarCrianca(getEmail(), getSenha());
+		validaPagina();
 	}
-	
-	public void validaPagina(List<Responsavel> list) throws Exception {
-		if(list.size() >0) {
-			FacesContext.getCurrentInstance().getExternalContext()
-	        .redirect("iu01_tarefa.jsf");
-		}else {
-			 FacesContext.getCurrentInstance().
-             addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO AO LOGAR", "Verifique se o email/senha estão corretos"));
+
+	public void validaPagina() throws Exception {
+		if (resp.size() > 0) {
+			UsuarioLogado.getInstance().setUsuario(resp.get(0));
+			FacesContext.getCurrentInstance().getExternalContext().redirect("iu01_tarefa.jsf");
+		} else if (crianca.size() > 0) {
+			UsuarioLogado.getInstance().setUsuario(crianca.get(0));
+			FacesContext.getCurrentInstance().getExternalContext().redirect("iu01_tarefa.jsf");
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"ERRO AO LOGAR", "Verifique se o email/senha estão corretos"));
 			PrimeFaces.current().ajax().update("idformLogin:growl");
 		}
 	}
-	public void clearMultiViewState() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        String viewId = context.getViewRoot().getViewId();
-        PrimeFaces.current().multiViewState().clearAll(viewId, true);
-    }
 
-	
+	public void clearMultiViewState() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		String viewId = context.getViewRoot().getViewId();
+		PrimeFaces.current().multiViewState().clearAll(viewId, true);
+	}
+
 	public void mudaCadastroLogin() {
 		cadastro = true;
 	}
-	
-    public boolean isSkip() {
-        return skip;
-    }
 
-    public void setSkip(boolean skip) {
-        this.skip = skip;
-    }
+	public boolean isSkip() {
+		return skip;
+	}
+
+	public void setSkip(boolean skip) {
+		this.skip = skip;
+	}
 
 	public String getConfirmSenha() {
 		return confirmSenha;

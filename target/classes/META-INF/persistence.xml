@@ -10,6 +10,7 @@
 		<class>modelo.entity.Crianca</class>
 		<class>modelo.entity.Sala</class>
 		<class>modelo.entity.Tarefa</class>
+		<class>modelo.entity.Recompensa</class>
 		
 
 		<properties>

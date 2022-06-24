@@ -7,57 +7,39 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
-public class Tarefa implements Serializable {
+public class Recompensa implements Serializable  {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -4698293923908808899L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String nomeTarefa;
-	private String status;
-	private String dscTarefa;
-	private Double koin;
-	
+	private String nomeRecompensa;
+	private String descricao;
+	private double preco;
 	@ManyToOne
 	private Sala sala;
-	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNomeTarefa() {
-		return nomeTarefa;
+	public String getNomeRecompensa() {
+		return nomeRecompensa;
 	}
-	public void setNomeTarefa(String nomeTarefa) {
-		this.nomeTarefa = nomeTarefa;
+	public void setNomeRecompensa(String nomeRecompensa) {
+		this.nomeRecompensa = nomeRecompensa;
 	}
-	public String getStatus() {
-		return status;
+	public String getDescricao() {
+		return descricao;
 	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public String getDscTarefa() {
-		return dscTarefa;
-	}
-	public void setDscTarefa(String dscTarefa) {
-		this.dscTarefa = dscTarefa;
-	}
-	public Double getKoin() {
-		return koin;
-	}
-	public void setKoin(Double koin) {
-		this.koin = koin;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	public Sala getSala() {
 		return sala;
@@ -80,7 +62,7 @@ public class Tarefa implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Tarefa other = (Tarefa) obj;
+		Recompensa other = (Recompensa) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -88,5 +70,11 @@ public class Tarefa implements Serializable {
 			return false;
 		return true;
 	}
-
+	public double getPreco() {
+		return preco;
+	}
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+	
 }

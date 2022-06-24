@@ -1,6 +1,8 @@
 package modelo.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -11,6 +13,7 @@ import org.hibernate.cfg.annotations.QueryBinder;
 import factory.Factory;
 import modelo.entity.Crianca;
 import modelo.entity.Responsavel;
+import modelo.entity.Sala;
 import modelo.entity.Usuario;
 
 public class ManterUsuario {
@@ -18,6 +21,16 @@ public class ManterUsuario {
 	public void salvarResponsavel(Usuario entidade) {
 		EntityManager entityManager = Factory.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		Sala sala = new Sala();
+		Random random = new Random();
+		int numero = random.nextInt(1000);
+		String token = numero + "A";
+		sala.setToken(token);
+		entityManager.persist(sala);
+		entityTransaction.commit();
+		entidade.setSalas(new ArrayList<Sala>());
+		entidade.getSalas().add(sala);
 		entityTransaction.begin();
 		entityManager.persist(entidade);
 		entityTransaction.commit();
@@ -49,7 +62,7 @@ public class ManterUsuario {
 		EntityManager entityManager = Factory.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
-		String jpqlCrianca = "SELECT r FROM Crianca c where c.email = :pEmail and c.senha = :pSenha";
+		String jpqlCrianca = "SELECT c FROM Crianca c where c.email = :pEmail and c.senha = :pSenha";
 		List<Crianca> crianca = entityManager.createQuery(jpqlCrianca).setParameter("pEmail", email).setParameter("pSenha", senha).getResultList();
 		return crianca;
 	}
