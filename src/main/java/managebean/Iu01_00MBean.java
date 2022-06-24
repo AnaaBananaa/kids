@@ -1,12 +1,15 @@
 package managebean;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
-import org.primefaces.event.FlowEvent;
+import org.primefaces.PrimeFaces;
 
 import modelo.dao.ManterUsuario;
 import modelo.entity.Crianca;
@@ -34,10 +37,10 @@ public class Iu01_00MBean {
 	}
 	
 	public void onSalvarResponsavel() {
-		userResp.setDataNascimento(dataNasc);
-		userResp.setNome(nome);
-		userResp.setEmail(email);
-		userResp.setSenha(senha);
+		userResp.setNome(user.getNome());
+		userResp.setDataNascimento(user.getDataNascimento());
+		userResp.setEmail(user.getEmail());
+		userResp.setSenha(user.getSenha());
 		userResp.setIsResponsavel(true);
 		ManterUsuario manterResp = new ManterUsuario();
 		manterResp.salvarResponsavel(userResp);
@@ -54,12 +57,27 @@ public class Iu01_00MBean {
 		manterUsuario.salvarCrianca(userCrianca);
 	}
 	
-	public void onBuscarUsuario() {
+	public void onBuscarUsuario() throws Exception {
 		ManterUsuario manterUsuario = new ManterUsuario();
-		email = "ana@gmail.com";
-		senha = "123";
-		manterUsuario.onBuscarUsuario(email, senha);
+		validaPagina(manterUsuario.onBuscarResp(getEmail(), getSenha()));
 	}
+	
+	public void validaPagina(List<Responsavel> list) throws Exception {
+		if(list.size() >0) {
+			FacesContext.getCurrentInstance().getExternalContext()
+	        .redirect("iu01_tarefa.jsf");
+		}else {
+			 FacesContext.getCurrentInstance().
+             addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO AO LOGAR", "Verifique se o email/senha estão corretos"));
+			PrimeFaces.current().ajax().update("idformLogin:growl");
+		}
+	}
+	public void clearMultiViewState() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        String viewId = context.getViewRoot().getViewId();
+        PrimeFaces.current().multiViewState().clearAll(viewId, true);
+    }
+
 	
 	public void mudaCadastroLogin() {
 		cadastro = true;
@@ -73,16 +91,6 @@ public class Iu01_00MBean {
         this.skip = skip;
     }
 
-    public String onFlowProcess(FlowEvent event) {
-        if (skip) {
-            skip = false; //reset in case user goes back
-            return "confirm";
-        }
-        else {
-            return event.getNewStep();
-        }
-    }
-    
 	public String getConfirmSenha() {
 		return confirmSenha;
 	}

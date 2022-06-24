@@ -12,13 +12,28 @@ body {
 	margin: 0px;
 }
 
-.button {
-	border-radius: 60px;
-	background-color: #FFD60A;
+.button-yellow {
+	border-radius: 45px;
 	border-color: #FFD60A;
-	height: 100px;
-	width:100px;
-	background-image: url(.../images/seta.png) !important;
+	margin-right: 160px;
+	float: right;
+	padding: 40px;
+	border: none;
+	outline: none;
+}
+
+.pi-arrow-right {
+	background-color: #FFD60A;
+	font-weight: bold;
+}
+
+.pi-arrow-right:hover{
+	color: #a18706;
+}
+
+.imagem-frase {
+	position: fixed;
+	bottom: 0px;
 }
 </style>
 	<title>Bem-Vindo ao Kid$</title>
@@ -29,11 +44,11 @@ body {
 
 		<div style="float: left; width: 100vw; height: 100hv">
 			<div style="float: left; width: 40vw; height: 100vh;">
-				<div style="height: 40vh;">
+				<div style="height: 43vh;">
 					<img src="images/logo.png"
 						style="width: 120px; height: 100px; margin: 10px;" />
 				</div>
-				<div style="height: 60vh; align-content: flex-end;">
+				<div class="imagem-frase">
 					<img src="images/Imagem1.png" style="width: 500px;" />
 				</div>
 			</div>
@@ -43,7 +58,8 @@ body {
 						style="width: 450px; margin: 30px 100px 0px 50px; float: right;" />
 				</div>
 				<div style="width: 60vw; float: right;">
-					<p:commandButton action="#{indexMBean.encaminhar()}" styleClass="button" style="float: right; margin-right:100px;"/>
+					<a href="iu01_00.jsf"> <i class="pi pi-arrow-right button-yellow" style="font-size: 2rem"/>
+					</a>
 				</div>
 			</div>
 		</div>
