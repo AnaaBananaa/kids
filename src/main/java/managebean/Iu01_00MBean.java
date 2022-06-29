@@ -1,5 +1,6 @@
 package managebean;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.primefaces.PrimeFaces;
 import modelo.dao.ManterUsuario;
 import modelo.entity.Crianca;
 import modelo.entity.Responsavel;
+import modelo.entity.Sala;
 import modelo.entity.Usuario;
 import modelo.entity.UsuarioLogado;
 
@@ -32,11 +34,11 @@ public class Iu01_00MBean {
 	private boolean cadastro;
 	private List<Responsavel> resp;
 	private List<Crianca> crianca;
+	private String sala;
 
 	@PostConstruct
 	public void init() {
 		System.out.println(" Bean 2 executado! ");
-		setCadastro(false);
 	}
 
 	public void onSalvarResponsavel() {
@@ -49,15 +51,24 @@ public class Iu01_00MBean {
 		manterResp.salvarResponsavel(userResp);
 	}
 
-	public void onSalvarCrianca() {
-		userCrianca.setDataNascimento(user.getDataNascimento());
-		userCrianca.setNome(user.getNome());
-		userCrianca.setEmail(user.getEmail());
-		userCrianca.setSenha(user.getSenha());
-		userCrianca.setIsResponsavel(false);
-		userCrianca.setKoin(0.00);
+	public void cadastoCrianca() {
 		ManterUsuario manterUsuario = new ManterUsuario();
-		manterUsuario.salvarCrianca(userCrianca);
+		if (manterUsuario.onBuscarSala(sala) != null) {
+			userCrianca.setSalas(new ArrayList<Sala>());
+			userCrianca.setDataNascimento(user.getDataNascimento());
+			userCrianca.setNome(user.getNome());
+			userCrianca.setEmail(user.getEmail());
+			userCrianca.setSenha(user.getSenha());
+			userCrianca.setIsResponsavel(false);
+			userCrianca.setKoin(0.00);
+			userCrianca.getSalas().add(manterUsuario.onBuscarSala(sala));
+			manterUsuario.salvarCrianca(userCrianca);
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO AO CADASTRAR", "Sala inexistente"));
+			PrimeFaces.current().ajax().update("idformLogin:growl");
+		}
+
 	}
 
 	public void onBuscarUsuario() throws Exception {
@@ -169,6 +180,14 @@ public class Iu01_00MBean {
 
 	public void setCadastro(boolean cadastro) {
 		this.cadastro = cadastro;
+	}
+
+	public String getSala() {
+		return sala;
+	}
+
+	public void setSala(String sala) {
+		this.sala = sala;
 	}
 
 }

@@ -23,7 +23,8 @@ body {
 				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
 				url="iu01_criarTarefa.jsf" />
 			<p:menuitem value="CRIAR RECOMPENSA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}" url="iu01_criarRecompensa.jsf"/>
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
+				url="iu01_criarRecompensa.jsf" />
 
 			<f:facet name="options">
 				<p:button value="Logout" icon="pi pi-fw pi-sign-out"
@@ -38,6 +39,10 @@ body {
 		<p:outputLabel value="DESCRICAO" for="dsc" />
 		<p:inputText id="dsc"
 			value="#{iu01_criarTarefaMBean.tarefa.dscTarefa}" />
+
+		<p:selectOneMenu id="group" value="#{iu01_criarTarefaMBean.crianca}">
+			<f:selectItems value="#{selectOneMenuView.listaCombo}" />
+		</p:selectOneMenu>
 
 		<p:outputLabel value="CUSTO" for="custo" />
 		<p:inputText id="custo" value="#{iu01_criarTarefaMBean.tarefa.koin}" />

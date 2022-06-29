@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Recompensa implements Serializable  {
@@ -23,6 +24,9 @@ public class Recompensa implements Serializable  {
 	private double preco;
 	@ManyToOne
 	private Sala sala;
+	@OneToOne
+	private Crianca crianca;
+	
 	public Long getId() {
 		return id;
 	}
@@ -75,6 +79,12 @@ public class Recompensa implements Serializable  {
 	}
 	public void setPreco(double preco) {
 		this.preco = preco;
+	}
+	public Crianca getCrianca() {
+		return crianca;
+	}
+	public void setCrianca(Crianca crianca) {
+		this.crianca = crianca;
 	}
 	
 }

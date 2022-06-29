@@ -4,11 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
@@ -77,8 +75,8 @@ public class Usuario implements Serializable{
 	public List<Sala> getSalas() {
 		return salas;
 	}
-	public void setSalas(List<Sala> salas) {
-		this.salas = salas;
+	public void setSalas(List<Sala> sala) {
+		this.salas = sala;
 	}
 	@Override
 	public int hashCode() {

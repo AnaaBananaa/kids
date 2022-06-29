@@ -90,10 +90,14 @@ body {
 						</div>
 						<h:panelGrid id="confirmation" columns="1"
 							columnClasses="grid,grid,grid">
+							<div id="codigoresp">
+								<p:outputLabel value="Código da sala do responsável" for="cod" rendered="#{iu01_00MBean.cadastro}"/>
+								<p:inputText id="cod" value="#{iu01_00MBean.sala}"/>
+							</div>
 							<p:commandButton value="RESPONSAVEL" id="responsavel"
 								action="#{iu01_00MBean.onSalvarResponsavel()}" />
 							<p:commandButton value="CRIANÇA" id="crianca"
-								action="#{iu01_00MBean.onSalvarCrianca()}" />
+								action="#{iu01_00MBean.cadastoCrianca()}" update="confirmation"/>
 						</h:panelGrid>
 					</h:panelGrid>
 				</p:tab>

@@ -26,6 +26,9 @@ public class Tarefa implements Serializable {
 	private String dscTarefa;
 	private Double koin;
 	
+	@OneToOne
+	private Crianca crianca;
+	
 	@ManyToOne
 	private Sala sala;
 	
@@ -87,6 +90,12 @@ public class Tarefa implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	public Crianca getCrianca() {
+		return crianca;
+	}
+	public void setCrianca(Crianca crianca) {
+		this.crianca = crianca;
 	}
 
 }

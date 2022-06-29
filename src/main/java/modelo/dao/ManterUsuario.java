@@ -67,4 +67,15 @@ public class ManterUsuario {
 		return crianca;
 	}
 
+	public Sala onBuscarSala(String token) {
+		EntityManager entityManager = Factory.getEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		String sql = "SELECT s FROM Sala s where s.token = :pToken";
+		List<Sala> sala = entityManager.createQuery(sql).setParameter("pToken", token).getResultList();
+		if(!sala.isEmpty()) {
+			return sala.get(0);
+		}
+		return null;
+	}
 }
