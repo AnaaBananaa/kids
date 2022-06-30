@@ -12,17 +12,43 @@ body {
 	margin: 0px;
 }
 
-.margin {
-	margin-top: 10px;
-	margin-left: 40px;
-}
-
 .div-branca {
 	float: right;
 	width: 30vw;
 	height: 100vh;
 	border-radius: 10px 0px 0xp 10px;
 	background-color: white;
+}
+
+#login-section1 {
+	margin-top: 20px;
+	height: 65vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.input-wrapper {
+	height: 60%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.label-input {
+	width: 250px;
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.kids-login {
+	width: 55vw;
+	position: absolute;
+	bottom: 0;
+	left: 0;
 }
 
 .ui-wizard-content {
@@ -36,34 +62,35 @@ body {
 		<p:growl id="growl" sticky="true" showDetail="true" />
 
 		<div style="float: left; width: 60vw; height: 100hv">
-			<img src="images/logo.png"
-				style="width: 120px; height: 100px; margin: 10px" />
+			<img src="images/koin.png"
+				style="width: 85px; height: 85px; margin: 10px" />
 		</div>
+
+		<img src="images/login-kids.png" class="kids-login" />
+
+
 		<div class="div-branca">
 			<p:tabView multiViewState="true" id="tabViewMVS">
 				<p:tab id="login" title="Login">
 
-					<h:panelGrid columns="1" columnClasses="label, value">
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="Email" for="emailLogin" />
-							<p:inputText id="emailLogin" value="#{iu01_00MBean.email}" />
-						</div>
+					<div id="login-section1">
+						<img src="images/login-logo.png" style="width: 180px" />
+						<div class="input-wrapper">
+							<h1>Fazer Login</h1>
+							<div class="label-input">
+								<p:outputLabel value="Email" for="emailLogin" />
+								<p:inputText id="emailLogin" value="#{iu01_00MBean.email}" />
+							</div>
 
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="Senha" for="senhaLogin" />
-							<p:inputText id="senhaLogin" value="#{iu01_00MBean.senha}" />
-						</div>
-					</h:panelGrid>
+							<div class="label-input">
+								<p:outputLabel value="Senha" for="senhaLogin" />
+								<p:inputText id="senhaLogin" value="#{iu01_00MBean.senha}" />
+							</div>
 
-					<p:commandButton value="ENTRAR" id="entrar"
-						action="#{iu01_00MBean.onBuscarUsuario()}" />
-					<div class="p-col-2">
-						<p:divider>
-							<b>OU</b>
-						</p:divider>
+						</div>
+						<p:commandButton value="ENTRAR" id="entrar"
+							action="#{iu01_00MBean.onBuscarUsuario()}" />
 					</div>
-					<p:commandButton value="CADASTRE-SE" id="cadastre-se"
-						action="#{iu01_00MBean.clearMultiViewState()}" />
 				</p:tab>
 				<p:tab id="personal" title="Cadastro">
 					<p:messages />
