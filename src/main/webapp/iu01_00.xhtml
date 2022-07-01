@@ -24,6 +24,7 @@ body {
 	height: 100vh;
 	border-radius: 15px 0px 0px 15px;
 	background-color: white;
+	box-shadow: -25px 0px 25px -10px rgba(0,0,0,0.1);
 }
 
 .tabs-head {
@@ -93,17 +94,33 @@ body {
 	left: 0;
 }
 
-.user-type {
+.center-option {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.user-type-button {
 	width: 250px !important;
 	background: #FF6B6B !important;
 	color: #F5FFFA !important;
 	border: none !important;
-	opacity: 0.85;
-	transition: 0.4s;
+	transition: 0.4s !important;
+	width: 250px !important;
 }
 
-.user-type:hover {
-	opacity: 1;
+.user-type-button.upper {
+	top: -40px;
+}
+
+h4 {
+	margin: 0;
+}
+
+.cadastro-input {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }
 
 .ui-wizard-content {
@@ -137,7 +154,7 @@ body {
 				<div class="section-content">
 					<img src="images/login-logo.png" style="width: 180px" />
 					<div class="input-wrapper">
-						<h1 id="titulo" onclick="myFunction()">Fazer Login</h1>
+						<h1 id="titulo">Fazer Login</h1>
 						<div class="label-input">
 							<p:outputLabel value="Email" for="emailLogin" />
 							<p:inputText id="emailLogin" value="#{iu01_00MBean.email}" />
@@ -156,42 +173,70 @@ body {
 			</div>
 
 			<div class="display-content">
-				<div class="section-content">
+				<div class="section-content" style="height: 80vh">
 					<p:messages />
-					<img src="images/Group 37.png" style="width: 180px" />
-					<p:commandButton class="user-type" value="RESPONSAVEL"
-						id="responsavel" action="#{iu01_00MBean.onSalvarResponsavel()}" />
-						
-					<img src="images/logo-login.png" style="width: 180px" />
-					<p:commandButton class="user-type" value="CRIANÇA" id="crianca"
-						action="#{iu01_00MBean.onSalvarCrianca()}" />
+					<h2 id="titulo">Escolha sua função:</h2>
+					<div class="center-option">
+						<img src="images/responsavel.png" style="width: 250px" />
+						<p:commandButton class="user-type-button upper"
+							value="RESPONSAVEL" id="responsavel"
+							action="#{iu01_00MBean.onSalvarResponsavel()}" />
+					</div>
 
+					<div class="center-option">
+						<img src="images/crianca.png" style="width: 250px" />
+						<p:commandButton class="user-type-button upper" value="CRIANÇA"
+							id="crianca" action="#{iu01_00MBean.onSalvarCrianca()}" />
+					</div>
 
 				</div>
 			</div>
+
+			<div class="display-content">
+				<p:messages />
+				<div class="section-content" style="height: 80vh">
+					<img src="images/login-logo.png" style="width: 180px" />
+					<h4 id="titulo">Preencha os campos a seguir</h4>
+					<div class="cadastro-input">
+
+						<p:outputLabel value="Nome" for="nome" />
+						<p:inputText id="nome" value="#{iu01_00MBean.user.nome}" />
+
+					</div>
+					<div class="cadastro-input">
+
+						<p:outputLabel value="Email" for="email" />
+						<p:inputText id="email" value="#{iu01_00MBean.user.email}" />
+
+					</div>
+					<div class="cadastro-input">
+
+						<p:outputLabel value="Senha" for="senha" />
+						<p:inputText id="senha" value="#{iu01_00MBean.user.senha}" />
+
+					</div>
+					<div class="cadastro-input">
+
+						<p:outputLabel value="Data de Nascimento" for="nasc" />
+						<p:datePicker id="nasc"
+							value="#{iu01_00MBean.user.dataNascimento}" />
+
+					</div>
+					<div class="cadastro-input">
+
+						<p:outputLabel value="Sala" for="sala" />
+						<p:inputText id="sala" value="#{iu01_00MBean.user.senha}" />
+
+					</div>
+
+					<p:commandButton class="user-type-button" value="CADASTRAR"
+						id="cadastrar" action="#{iu01_00MBean.onSalvarCrianca()}" />
+				</div>
+			</div>
+
 		</div>
 	</h:form>
 
-	<script>
-	var tabs = document.querySelectorAll('.toggle-tab');
-	var contents = document.querySelectorAll('.display-content')
-	
-	tabs.forEach((tab, index) =>{
-		tab.addEventListener('click', () => {
-
-			tabs.forEach((tab)=>{
-				tab.classList.remove('is_active');
-			})
-	
-			contents.forEach((content)=>{
-				content.classList.remove('is_active');
-			})
-			
-			tabs[index].classList.add('is_active')
-			contents[index].classList.add('is_active')
-		});
-	})
-	
-	</script>
+	<script src="functions_login.js"></script> 
 </h:body>
 </html>
