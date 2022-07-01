@@ -7,20 +7,62 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600')
+	;
+</style>
+	<style>
 body {
 	background-color: #4ECDC4;
 	margin: 0px;
+	font-family: 'Poppins', sans-serif;
 }
 
 .div-branca {
 	float: right;
-	width: 30vw;
+	width: 35vw;
 	height: 100vh;
-	border-radius: 10px 0px 0xp 10px;
+	border-radius: 15px 0px 0px 15px;
 	background-color: white;
 }
 
-#login-section1 {
+.tabs-head {
+	display: flex;
+	align-items: strech;
+}
+
+.toggle-tab {
+	display: flex;
+	width: 50%;
+	height: 50px;
+	align-items: center;
+	justify-content: center;
+	background: #f2f2f2;
+	font-size: 20px;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.toggle-tab.is_active {
+	background: #fff;
+	border-bottom: 3px solid #4ECDC4;
+}
+
+.toggle-tab:hover {
+	background: #fff;
+	border-bottom: 3px solid #4ECDC4;
+}
+
+.display-content {
+	display: none;
+	padding: 30px;
+}
+
+.display-content.is_active {
+	display: block;
+}
+
+.section-content {
 	margin-top: 20px;
 	height: 65vh;
 	display: flex;
@@ -70,29 +112,38 @@ body {
 
 
 		<div class="div-branca">
-			<p:tabView multiViewState="true" id="tabViewMVS">
-				<p:tab id="login" title="Login">
 
-					<div id="login-section1">
-						<img src="images/login-logo.png" style="width: 180px" />
-						<div class="input-wrapper">
-							<h1>Fazer Login</h1>
-							<div class="label-input">
-								<p:outputLabel value="Email" for="emailLogin" />
-								<p:inputText id="emailLogin" value="#{iu01_00MBean.email}" />
-							</div>
 
-							<div class="label-input">
-								<p:outputLabel value="Senha" for="senhaLogin" />
-								<p:inputText id="senhaLogin" value="#{iu01_00MBean.senha}" />
-							</div>
+			<div class="tabs-head">
+				<span class="toggle-tab is_active"
+					style="border-radius: 15px 0px 0px 0px;">Login</span> <span
+					class="toggle-tab">Cadastro</span>
+			</div>
 
+			<div class="display-content">
+				<div class="section-content">
+					<img src="images/login-logo.png" style="width: 180px" />
+					<div class="input-wrapper">
+						<h1 id="titulo" onclick="myFunction()">Fazer Login</h1>
+						<div class="label-input">
+							<p:outputLabel value="Email" for="emailLogin" />
+							<p:inputText id="emailLogin" value="#{iu01_00MBean.email}" />
 						</div>
-						<p:commandButton value="ENTRAR" id="entrar"
-							action="#{iu01_00MBean.onBuscarUsuario()}" />
+
+						<div class="label-input">
+							<p:outputLabel value="Senha" for="senhaLogin" />
+							<p:inputText id="senhaLogin" value="#{iu01_00MBean.senha}" />
+						</div>
+
 					</div>
-				</p:tab>
-				<p:tab id="personal" title="Cadastro">
+					<p:commandButton value="ENTRAR" id="entrar"
+						action="#{iu01_00MBean.onBuscarUsuario()}" />
+
+				</div>
+			</div>
+
+			<div class="display-content is_active">
+				<div class="section-content">
 					<p:messages />
 					<h:panelGrid columns="1" columnClasses="label, value">
 						<div style="width: 200px" class="margin">
@@ -123,9 +174,26 @@ body {
 								action="#{iu01_00MBean.onSalvarCrianca()}" />
 						</h:panelGrid>
 					</h:panelGrid>
-				</p:tab>
-			</p:tabView>
+				</div>
+			</div>
 		</div>
 	</h:form>
+
+	<script>
+	var tabs = document.querySelectorAll('.toggle-tab');
+	var contents = document.querySelectorAll('.display-content')
+	
+	tabs.forEach((tab, index) =>{
+		tab.addEventListener('click', () => {
+
+			tabs.forEach((tab)=>{
+				tab.classList.remove('is-active');
+			})
+			console.log(tabs[index])
+			tabs[index].classList.add('is-active')
+		});
+	})
+	
+	</script>
 </h:body>
 </html>
