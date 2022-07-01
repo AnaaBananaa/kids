@@ -78,4 +78,11 @@ public class ManterUsuario {
 		}
 		return null;
 	}
+	
+	public Crianca findCrianca(long id) {
+		EntityManager entityManager = Factory.getEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		return entityManager.find(Crianca.class, id);
+	}
 }

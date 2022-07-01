@@ -11,25 +11,56 @@ body {
 	background-color: #4ECDC4;
 	margin: 0px;
 }
+
+.tarefa {
+	background-color: white;
+	margin: 20px;
+	width: 80em;
+	padding: 5px;
+}
+
+.koin {
+	background-color: #4ECDC4;
+}
 </style>
 	<title>Bem-Vindo ao Kid$</title>
 </h:head>
 <h:body>
 	<h:form id="idform">
 		<p:menubar>
+			<f:facet name="crianca">
+				<div class="koin">
+					<p:outputLabel value="#{iu01_tarefaMBean.crianca.koin}" />
+				</div>
+			</f:facet>
 			<p:menuitem value="TAREFAS" icon="pi pi-fw pi-trash" />
 			<p:menuitem value="RECOMPENSAS" icon="pi pi-fw pi-trash" />
 			<p:menuitem value="CRIAR TAREFA"
 				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
 				url="iu01_criarTarefa.jsf" />
 			<p:menuitem value="CRIAR RECOMPENSA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}" url="iu01_criarRecompensa.jsf" />
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
+				url="iu01_criarRecompensa.jsf" />
 
 			<f:facet name="options">
 				<p:button value="Logout" icon="pi pi-fw pi-sign-out"
 					styleClass="ui-button-info" />
 			</f:facet>
 		</p:menubar>
+
+		<h:panelGroup id="alvs">
+			<p:repeat value="#{iu01_tarefaMBean.retornaTarefa()}" var="tarefa">
+				<div class="tarefa">
+					<p:outputLabel value="#{tarefa.nomeTarefa}" />
+					<p:outputLabel value="#{tarefa.dscTarefa}" />
+					<p:outputLabel value="#{tarefa.koin}" />
+					<p:commandButton value="#{tarefa.status}"
+						action="#{iu01_tarefaMBean.mudarStatus(tarefa)}"
+						update="idform:alvs"
+						disabled="#{iu01_tarefaMBean.desabilitaBotao(tarefa)}" />
+				</div>
+			</p:repeat>
+		</h:panelGroup>
 
 	</h:form>
 </h:body>

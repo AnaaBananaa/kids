@@ -11,45 +11,65 @@ body {
 	background-color: #4ECDC4;
 	margin: 0px;
 }
+
+.margin {
+	margin-top: 10px;
+	margin-left: 40px;
+}
+
+.ui-wizard-content {
+	margin-left: 100px
+}
 </style>
 	<title>Bem-Vindo ao Kid$</title>
 </h:head>
 <h:body>
-	<h:form id="idform">
+	<h:form id="idformLogin">
+		<p:growl id="growl" sticky="true" showDetail="true" />
 		<p:menubar>
 			<p:menuitem value="TAREFAS" icon="pi pi-fw pi-trash" />
-			<p:menuitem value="RECOMPENSAS" icon="pi pi-fw pi-trash" />
+			<p:menuitem value="RECOMPENSAS" icon="pi pi-fw pi-trash" url="iu01_criarRecompensa.jsf" />
 			<p:menuitem value="CRIAR TAREFA"
 				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
 				url="iu01_criarTarefa.jsf" />
-			<p:menuitem value="CRIAR RECOMPENSA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
-				url="iu01_criarRecompensa.jsf" />
-
 			<f:facet name="options">
 				<p:button value="Logout" icon="pi pi-fw pi-sign-out"
 					styleClass="ui-button-info" />
 			</f:facet>
+			<p:menuitem value="CRIAR RECOMPENSA"
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}" />
 		</p:menubar>
+		<div>
+			<h:panelGrid columns="1" columnClasses="label, value">
+				<div>
+					<p:outputLabel value="NOME" for="nome" />
+					<p:inputText id="nome"
+						value="#{iu01_criarTarefaMBean.tarefa.nomeTarefa}" />
+				</div>
 
-		<p:outputLabel value="NOME" for="nome" />
-		<p:inputText id="nome"
-			value="#{iu01_criarTarefaMBean.tarefa.nomeTarefa}" />
+				<div>
+					<p:outputLabel value="DESCRICAO" for="dsc" />
+					<p:inputText id="dsc"
+						value="#{iu01_criarTarefaMBean.tarefa.dscTarefa}" />
+				</div>
 
-		<p:outputLabel value="DESCRICAO" for="dsc" />
-		<p:inputText id="dsc"
-			value="#{iu01_criarTarefaMBean.tarefa.dscTarefa}" />
+				<div>
+					<p:selectOneMenu id="group"
+						value="#{iu01_criarTarefaMBean.crianca}">
+						<f:selectItems value="#{iu01_criarTarefaMBean.listaCombo}" />
+					</p:selectOneMenu>
+				</div>
 
-		<p:selectOneMenu id="group" value="#{iu01_criarTarefaMBean.crianca}">
-			<f:selectItems value="#{selectOneMenuView.listaCombo}" />
-		</p:selectOneMenu>
+				<div>
+					<p:outputLabel value="CUSTO" for="custo" />
+					<p:inputText id="custo"
+						value="#{iu01_criarTarefaMBean.tarefa.koin}" />
+				</div>
+			</h:panelGrid>
 
-		<p:outputLabel value="CUSTO" for="custo" />
-		<p:inputText id="custo" value="#{iu01_criarTarefaMBean.tarefa.koin}" />
-
-		<p:commandButton value="CRIAR TAREFA" id="tarefa"
-			action="#{iu01_criarTarefaMBean.onSalvarTarefa()}" />
-
+			<p:commandButton value="CADASTRAR TAREFA" id="entrar"
+				action="#{iu01_criarTarefaMBean.onSalvarTarefa}" />
+		</div>
 	</h:form>
 </h:body>
 </html>
