@@ -93,6 +93,19 @@ body {
 	left: 0;
 }
 
+.user-type {
+	width: 250px !important;
+	background: #FF6B6B !important;
+	color: #F5FFFA !important;
+	border: none !important;
+	opacity: 0.85;
+	transition: 0.4s;
+}
+
+.user-type:hover {
+	opacity: 1;
+}
+
 .ui-wizard-content {
 	margin-left: 100px
 }
@@ -120,7 +133,7 @@ body {
 					class="toggle-tab">Cadastro</span>
 			</div>
 
-			<div class="display-content">
+			<div class="display-content is_active">
 				<div class="section-content">
 					<img src="images/login-logo.png" style="width: 180px" />
 					<div class="input-wrapper">
@@ -142,38 +155,18 @@ body {
 				</div>
 			</div>
 
-			<div class="display-content is_active">
+			<div class="display-content">
 				<div class="section-content">
 					<p:messages />
-					<h:panelGrid columns="1" columnClasses="label, value">
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="Nome" for="nome" />
-							<p:inputText id="nome" value="#{iu01_00MBean.user.nome}" />
-						</div>
+					<img src="images/Group 37.png" style="width: 180px" />
+					<p:commandButton class="user-type" value="RESPONSAVEL"
+						id="responsavel" action="#{iu01_00MBean.onSalvarResponsavel()}" />
+						
+					<img src="images/logo-login.png" style="width: 180px" />
+					<p:commandButton class="user-type" value="CRIANÇA" id="crianca"
+						action="#{iu01_00MBean.onSalvarCrianca()}" />
 
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="Email" for="email" />
-							<p:inputText id="email" value="#{iu01_00MBean.user.email}" />
-						</div>
 
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="Senha" for="senha" />
-							<p:inputText id="senha" value="#{iu01_00MBean.user.senha}" />
-						</div>
-
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="Data de Nascimento" for="nasc" />
-							<p:datePicker id="nasc"
-								value="#{iu01_00MBean.user.dataNascimento}" />
-						</div>
-						<h:panelGrid id="confirmation" columns="1"
-							columnClasses="grid,grid,grid">
-							<p:commandButton value="RESPONSAVEL" id="responsavel"
-								action="#{iu01_00MBean.onSalvarResponsavel()}" />
-							<p:commandButton value="CRIANÇA" id="crianca"
-								action="#{iu01_00MBean.onSalvarCrianca()}" />
-						</h:panelGrid>
-					</h:panelGrid>
 				</div>
 			</div>
 		</div>
@@ -187,10 +180,15 @@ body {
 		tab.addEventListener('click', () => {
 
 			tabs.forEach((tab)=>{
-				tab.classList.remove('is-active');
+				tab.classList.remove('is_active');
 			})
-			console.log(tabs[index])
-			tabs[index].classList.add('is-active')
+	
+			contents.forEach((content)=>{
+				content.classList.remove('is_active');
+			})
+			
+			tabs[index].classList.add('is_active')
+			contents[index].classList.add('is_active')
 		});
 	})
 	
