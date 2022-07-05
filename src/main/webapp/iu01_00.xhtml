@@ -184,13 +184,13 @@ h4 {
 						<img src="images/responsavel.png" style="width: 250px" />
 						<p:commandButton class="user-type-button upper"
 							value="RESPONSAVEL" id="responsavel"
-							action="#{iu01_00MBean.onSalvarResponsavel()}" />
+							action="#{iu01_00MBean.hasResp(true)}" />
 					</div>
 
 					<div class="center-option">
 						<img src="images/crianca.png" style="width: 250px" />
 						<p:commandButton class="user-type-button upper" value="CRIANÇA"
-							id="crianca" action="#{iu01_00MBean.onSalvarCrianca()}" />
+							id="crianca" action="#{iu01_00MBean.hasResp(false)}" />
 					</div>
 
 				</div>
@@ -229,12 +229,12 @@ h4 {
 					<div class="cadastro-input" id="sala" >
 
 						<p:outputLabel value="Sala" for="sala" />
-						<p:inputText id="sala" value="#{iu01_00MBean.user.senha}" />
+						<p:inputText id="sala" value="#{iu01_00MBean.sala}" />
 
 					</div>
 
 					<p:commandButton class="user-type-button" value="CADASTRAR"
-						id="cadastrar" action="#{iu01_00MBean.onSalvarCrianca()}" />
+						id="cadastrar" action="#{iu01_00MBean.onSalvar()}" />
 				</div>
 			</div>
 

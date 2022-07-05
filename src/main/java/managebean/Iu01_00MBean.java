@@ -35,6 +35,7 @@ public class Iu01_00MBean {
 	private List<Responsavel> resp;
 	private List<Crianca> crianca;
 	private String sala;
+	private boolean isResp;
 
 	@PostConstruct
 	public void init() {
@@ -49,6 +50,14 @@ public class Iu01_00MBean {
 		userResp.setIsResponsavel(true);
 		ManterUsuario manterResp = new ManterUsuario();
 		manterResp.salvarResponsavel(userResp);
+	}
+	
+	public void onSalvar() {
+		if (isResp) {
+			onSalvarResponsavel();
+		}else {
+			cadastoCrianca();
+		}
 	}
 
 	public void cadastoCrianca() {
@@ -90,6 +99,10 @@ public class Iu01_00MBean {
 					"ERRO AO LOGAR", "Verifique se o email/senha estão corretos"));
 			PrimeFaces.current().ajax().update("idformLogin:growl");
 		}
+	}
+	
+	public void hasResp(boolean s) {
+		isResp = s;
 	}
 
 	public void clearMultiViewState() {
@@ -188,6 +201,14 @@ public class Iu01_00MBean {
 
 	public void setSala(String sala) {
 		this.sala = sala;
+	}
+
+	public boolean isResp() {
+		return isResp;
+	}
+
+	public void setResp(boolean isResp) {
+		this.isResp = isResp;
 	}
 
 }
