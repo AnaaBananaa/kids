@@ -1,5 +1,3 @@
-	console.log('oi')
-	
 	var tabs = document.querySelectorAll('.toggle-tab');
 	var contents = document.querySelectorAll('.display-content')
 	
@@ -25,12 +23,10 @@
 	})
 	
 	var buttonsUserType =  document.querySelectorAll(".user-type-button")
-	console.log(buttonsUserType)
 	buttonsUserType.forEach((button, index) => {
-		button.	addEventListener('click', ()=>{
+		button.addEventListener('click', ()=>{
 			unselect();
-			console.log(index)
-			if(index < 1){
+			if(index < 2){
 				tabs[1].classList.add('is_active')
 				contents[2].classList.add('is_active')
 			}else{
@@ -38,5 +34,13 @@
 				contents[0].classList.add('is_active')
 			}
 		})
+	})
+
+	buttonsUserType[1].addEventListener('click', ()=>{
+		document.getElementById('sala').classList.remove('field_invisible')
+	})
+
+	buttonsUserType[0].addEventListener('click', ()=>{
+		document.getElementById('sala').classList.add('field_invisible')
 	})
 	

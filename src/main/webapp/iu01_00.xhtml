@@ -63,6 +63,10 @@ body {
 	display: block;
 }
 
+.cadastro-input.field_invisible{
+	display: none !important;
+}
+
 .section-content {
 	margin-top: 20px;
 	height: 65vh;
@@ -222,7 +226,7 @@ h4 {
 							value="#{iu01_00MBean.user.dataNascimento}" />
 
 					</div>
-					<div class="cadastro-input">
+					<div class="cadastro-input" id="sala" >
 
 						<p:outputLabel value="Sala" for="sala" />
 						<p:inputText id="sala" value="#{iu01_00MBean.user.senha}" />
