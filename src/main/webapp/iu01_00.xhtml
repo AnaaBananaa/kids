@@ -7,22 +7,124 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600')
+	;
+</style>
+	<style>
 body {
 	background-color: #4ECDC4;
 	margin: 0px;
-}
-
-.margin {
-	margin-top: 10px;
-	margin-left: 40px;
+	font-family: 'Poppins', sans-serif;
 }
 
 .div-branca {
 	float: right;
-	width: 30vw;
+	width: 35vw;
 	height: 100vh;
-	border-radius: 10px 0px 0xp 10px;
+	border-radius: 15px 0px 0px 15px;
 	background-color: white;
+	box-shadow: -25px 0px 25px -10px rgba(0,0,0,0.1);
+}
+
+.tabs-head {
+	display: flex;
+	align-items: strech;
+}
+
+.toggle-tab {
+	display: flex;
+	width: 50%;
+	height: 50px;
+	align-items: center;
+	justify-content: center;
+	background: #f2f2f2;
+	font-size: 20px;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.toggle-tab.is_active {
+	background: #fff;
+	border-bottom: 3px solid #4ECDC4;
+}
+
+.toggle-tab:hover {
+	background: #fff;
+	border-bottom: 3px solid #4ECDC4;
+}
+
+.display-content {
+	display: none;
+	padding: 30px;
+}
+
+.display-content.is_active {
+	display: block;
+}
+
+.cadastro-input.field_invisible{
+	display: none !important;
+}
+
+.section-content {
+	margin-top: 20px;
+	height: 65vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.input-wrapper {
+	height: 60%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.label-input {
+	width: 250px;
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.kids-login {
+	width: 55vw;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.center-option {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.user-type-button {
+	width: 250px !important;
+	background: #FF6B6B !important;
+	color: #F5FFFA !important;
+	border: none !important;
+	transition: 0.4s !important;
+	width: 250px !important;
+}
+
+.user-type-button.upper {
+	top: -40px;
+}
+
+h4 {
+	margin: 0;
+}
+
+.cadastro-input {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }
 
 .ui-wizard-content {
@@ -36,73 +138,109 @@ body {
 		<p:growl id="growl" sticky="true" showDetail="true" />
 
 		<div style="float: left; width: 60vw; height: 100hv">
-			<img src="images/logo.png"
-				style="width: 120px; height: 100px; margin: 10px" />
+			<img src="images/koin.png"
+				style="width: 85px; height: 85px; margin: 10px" />
 		</div>
-		<div class="div-branca">
-			<p:tabView multiViewState="true" id="tabViewMVS">
-				<p:tab id="login" title="Login">
 
-					<h:panelGrid columns="1" columnClasses="label, value">
-						<div style="width: 200px" class="margin">
+		<img src="images/login-kids.png" class="kids-login" />
+
+
+		<div class="div-branca">
+
+
+			<div class="tabs-head">
+				<span class="toggle-tab is_active"
+					style="border-radius: 15px 0px 0px 0px;">Login</span> <span
+					class="toggle-tab">Cadastro</span>
+			</div>
+
+			<div class="display-content is_active">
+				<div class="section-content">
+					<img src="images/login-logo.png" style="width: 180px" />
+					<div class="input-wrapper">
+						<h1 id="titulo">Fazer Login</h1>
+						<div class="label-input">
 							<p:outputLabel value="Email" for="emailLogin" />
 							<p:inputText id="emailLogin" value="#{iu01_00MBean.email}" />
 						</div>
 
-						<div style="width: 200px" class="margin">
+						<div class="label-input">
 							<p:outputLabel value="Senha" for="senhaLogin" />
 							<p:inputText id="senhaLogin" value="#{iu01_00MBean.senha}" />
 						</div>
-					</h:panelGrid>
 
+					</div>
 					<p:commandButton value="ENTRAR" id="entrar"
 						action="#{iu01_00MBean.onBuscarUsuario()}" />
-					<div class="p-col-2">
-						<p:divider>
-							<b>OU</b>
-						</p:divider>
-					</div>
-					<p:commandButton value="CADASTRE-SE" id="cadastre-se"
-						action="#{iu01_00MBean.clearMultiViewState()}" />
-				</p:tab>
-				<p:tab id="personal" title="Cadastro">
+
+				</div>
+			</div>
+
+			<div class="display-content">
+				<div class="section-content" style="height: 80vh">
 					<p:messages />
-					<h:panelGrid columns="1" columnClasses="label, value">
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="Nome" for="nome" />
-							<p:inputText id="nome" value="#{iu01_00MBean.user.nome}" />
-						</div>
+					<h2 id="titulo">Escolha sua função:</h2>
+					<div class="center-option">
+						<img src="images/responsavel.png" style="width: 250px" />
+						<p:commandButton class="user-type-button upper"
+							value="RESPONSAVEL" id="responsavel"
+							action="#{iu01_00MBean.onSalvarResponsavel()}" />
+					</div>
 
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="Email" for="email" />
-							<p:inputText id="email" value="#{iu01_00MBean.user.email}" />
-						</div>
+					<div class="center-option">
+						<img src="images/crianca.png" style="width: 250px" />
+						<p:commandButton class="user-type-button upper" value="CRIANÇA"
+							id="crianca" action="#{iu01_00MBean.onSalvarCrianca()}" />
+					</div>
 
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="Senha" for="senha" />
-							<p:inputText id="senha" value="#{iu01_00MBean.user.senha}" />
-						</div>
+				</div>
+			</div>
 
-						<div style="width: 200px" class="margin">
-							<p:outputLabel value="Data de Nascimento" for="nasc" />
-							<p:datePicker id="nasc"
-								value="#{iu01_00MBean.user.dataNascimento}" />
-						</div>
-						<h:panelGrid id="confirmation" columns="1"
-							columnClasses="grid,grid,grid">
-							<div id="codigoresp">
-								<p:outputLabel value="Código da sala do responsável" for="cod" rendered="#{iu01_00MBean.cadastro}"/>
-								<p:inputText id="cod" value="#{iu01_00MBean.sala}"/>
-							</div>
-							<p:commandButton value="RESPONSAVEL" id="responsavel"
-								action="#{iu01_00MBean.onSalvarResponsavel()}" />
-							<p:commandButton value="CRIANÇA" id="crianca"
-								action="#{iu01_00MBean.cadastoCrianca()}" update="confirmation"/>
-						</h:panelGrid>
-					</h:panelGrid>
-				</p:tab>
-			</p:tabView>
+			<div class="display-content">
+				<p:messages />
+				<div class="section-content" style="height: 80vh">
+					<img src="images/login-logo.png" style="width: 180px" />
+					<h4 id="titulo">Preencha os campos a seguir</h4>
+					<div class="cadastro-input">
+
+						<p:outputLabel value="Nome" for="nome" />
+						<p:inputText id="nome" value="#{iu01_00MBean.user.nome}" />
+
+					</div>
+					<div class="cadastro-input">
+
+						<p:outputLabel value="Email" for="email" />
+						<p:inputText id="email" value="#{iu01_00MBean.user.email}" />
+
+					</div>
+					<div class="cadastro-input">
+
+						<p:outputLabel value="Senha" for="senha" />
+						<p:inputText id="senha" value="#{iu01_00MBean.user.senha}" />
+
+					</div>
+					<div class="cadastro-input">
+
+						<p:outputLabel value="Data de Nascimento" for="nasc" />
+						<p:datePicker id="nasc"
+							value="#{iu01_00MBean.user.dataNascimento}" />
+
+					</div>
+					<div class="cadastro-input" id="sala" >
+
+						<p:outputLabel value="Sala" for="sala" />
+						<p:inputText id="sala" value="#{iu01_00MBean.user.senha}" />
+
+					</div>
+
+					<p:commandButton class="user-type-button" value="CADASTRAR"
+						id="cadastrar" action="#{iu01_00MBean.onSalvarCrianca()}" />
+				</div>
+			</div>
+
 		</div>
 	</h:form>
+
+	<script src="functions_login.js"></script> 
 </h:body>
 </html>
