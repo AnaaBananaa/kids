@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.PrimeFaces;
@@ -19,7 +20,7 @@ import modelo.entity.Sala;
 import modelo.entity.Usuario;
 import modelo.entity.UsuarioLogado;
 
-@RequestScoped
+@ViewScoped
 @ManagedBean
 public class Iu01_00MBean {
 	private String confirmSenha;
@@ -35,12 +36,7 @@ public class Iu01_00MBean {
 	private List<Responsavel> resp;
 	private List<Crianca> crianca;
 	private String sala;
-	private boolean isResp;
-
-	@PostConstruct
-	public void init() {
-		System.out.println(" Bean 2 executado! ");
-	}
+	private int Resp = 2;
 
 	public void onSalvarResponsavel() {
 		userResp.setNome(user.getNome());
@@ -53,9 +49,9 @@ public class Iu01_00MBean {
 	}
 	
 	public void onSalvar() {
-		if (isResp) {
+		if (user instanceof Responsavel) {
 			onSalvarResponsavel();
-		}else {
+		}else if (user instanceof Crianca){
 			cadastoCrianca();
 		}
 	}
@@ -79,6 +75,16 @@ public class Iu01_00MBean {
 		}
 
 	}
+	
+	public void instanciaDe(int i) {
+		if(i == 1) {
+			user = new Responsavel();
+		}
+		else if(i == 0) {
+			user = new Crianca();
+		}
+		
+	}
 
 	public void onBuscarUsuario() throws Exception {
 		ManterUsuario manterUsuario = new ManterUsuario();
@@ -101,10 +107,6 @@ public class Iu01_00MBean {
 		}
 	}
 	
-	public void hasResp(boolean s) {
-		isResp = s;
-	}
-
 	public void clearMultiViewState() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		String viewId = context.getViewRoot().getViewId();
@@ -203,12 +205,12 @@ public class Iu01_00MBean {
 		this.sala = sala;
 	}
 
-	public boolean isResp() {
-		return isResp;
+	public int getResp() {
+		return Resp;
 	}
 
-	public void setResp(boolean isResp) {
-		this.isResp = isResp;
+	public void setResp(int resp) {
+		Resp = resp;
 	}
-
+	
 }

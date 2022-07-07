@@ -178,26 +178,24 @@ h4 {
 
 			<div class="display-content">
 				<div class="section-content" style="height: 80vh">
-					<p:messages />
 					<h2 id="titulo">Escolha sua função:</h2>
 					<div class="center-option">
 						<img src="images/responsavel.png" style="width: 250px" />
 						<p:commandButton class="user-type-button upper"
 							value="RESPONSAVEL" id="responsavel"
-							action="#{iu01_00MBean.hasResp(true)}" />
+							action="#{iu01_00MBean.instanciaDe(1)}" />
 					</div>
 
 					<div class="center-option">
 						<img src="images/crianca.png" style="width: 250px" />
 						<p:commandButton class="user-type-button upper" value="CRIANÇA"
-							id="crianca" action="#{iu01_00MBean.hasResp(false)}" />
+							id="crianca" action="#{iu01_00MBean.instanciaDe(0)}" />
 					</div>
 
 				</div>
 			</div>
 
 			<div class="display-content">
-				<p:messages />
 				<div class="section-content" style="height: 80vh">
 					<img src="images/login-logo.png" style="width: 180px" />
 					<h4 id="titulo">Preencha os campos a seguir</h4>
