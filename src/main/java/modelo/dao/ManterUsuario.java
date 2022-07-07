@@ -55,6 +55,7 @@ public class ManterUsuario {
 		StringBuilder sql = new StringBuilder();
 		String jpql = "SELECT r FROM Responsavel r where r.email = :pEmail and r.senha = :pSenha";
 		List<Responsavel> resp = entityManager.createQuery(jpql).setParameter("pEmail", email).setParameter("pSenha", senha).getResultList();
+		entityManager.close();
 		return resp;
 	}
 	
@@ -64,6 +65,7 @@ public class ManterUsuario {
 		entityTransaction.begin();
 		String jpqlCrianca = "SELECT c FROM Crianca c where c.email = :pEmail and c.senha = :pSenha";
 		List<Crianca> crianca = entityManager.createQuery(jpqlCrianca).setParameter("pEmail", email).setParameter("pSenha", senha).getResultList();
+		entityManager.close();
 		return crianca;
 	}
 
@@ -73,6 +75,7 @@ public class ManterUsuario {
 		entityTransaction.begin();
 		String sql = "SELECT s FROM Sala s where s.token = :pToken";
 		List<Sala> sala = entityManager.createQuery(sql).setParameter("pToken", token).getResultList();
+		entityManager.close();
 		if(!sala.isEmpty()) {
 			return sala.get(0);
 		}

@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+
+import org.primefaces.PrimeFaces;
 
 import modelo.dao.ManterTarefa;
 import modelo.entity.Crianca;
@@ -35,6 +39,9 @@ public class Iu01_criarTarefaMBean {
 		ManterTarefa manterTarefa = new ManterTarefa();
 		tarefa.setStatus("Disponível");
 		manterTarefa.salvarTarefa(tarefa, crianca);
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "CADASTRO EFETUADO COM SUCESSO", "Tarefa feita com sucesso"));
+		PrimeFaces.current().ajax().update("idformLogin:growl");
 	}
 	
 	public Tarefa getTarefa() {

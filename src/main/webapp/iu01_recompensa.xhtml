@@ -11,27 +11,50 @@ body {
 	background-color: #4ECDC4;
 	margin: 0px;
 }
+
+.recompensa{
+	background-color: white;
+	margin: 20px;
+	width: 80em;
+	padding: 5px;
+}
 </style>
 	<title>Bem-Vindo ao Kid$</title>
 </h:head>
 <h:body>
 	<h:form id="idform">
+		<p:growl id="growl" sticky="true" showDetail="true" />
+
 		<p:menubar>
-			<p:menuitem value="TAREFAS" icon="pi pi-fw pi-trash" />
-			<p:menuitem value="RECOMPENSAS" icon="pi pi-fw pi-trash" />
+			<p:menuitem value="TAREFAS" icon="pi pi-fw pi-trash" url="iu01_tarefa.jsf"/>
+			<p:menuitem value="RECOMPENSAS" icon="pi pi-fw pi-trash" url="iu01_recompensa.jsf" />
 			<p:menuitem value="CRIAR TAREFA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
+				rendered="#{iu01_recompensaMBean.pertenceResponsavel()}"
 				url="iu01_criarTarefa.jsf" />
 			<p:menuitem value="CRIAR RECOMPENSA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}" url="iu01_criarRecompensa.jsf" />
+				rendered="#{iu01_recompensaMBean.pertenceResponsavel()}"
+				url="iu01_criarRecompensa.jsf" />
 
 			<f:facet name="options">
 				<p:button value="Logout" icon="pi pi-fw pi-sign-out"
 					styleClass="ui-button-info" />
 			</f:facet>
 		</p:menubar>
-		
-		
+
+		<h:panelGroup id="alvs">
+			<p:repeat value="#{iu01_recompensaMBean.retornaRecompensa()}"
+				var="recompensa">
+				<div class="recompensa">
+					<p:outputLabel value="#{recompensa.nomeRecompensa}" />
+					<br />
+					<p:outputLabel value="#{recompensa.descricao}" />
+					<p:outputLabel value="#{recompensa.preco}" />
+					<p:commandButton value="RESGATAR"
+						action="#{iu01_recompensaMBean.resgate(recompensa)}"
+						update="idform:alvs" />
+				</div>
+			</p:repeat>
+		</h:panelGroup>
 
 	</h:form>
 </h:body>

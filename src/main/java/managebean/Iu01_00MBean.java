@@ -68,6 +68,9 @@ public class Iu01_00MBean {
 			userCrianca.setKoin(0.00);
 			userCrianca.getSalas().add(manterUsuario.onBuscarSala(sala));
 			manterUsuario.salvarCrianca(userCrianca);
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "CADASTRO EFETUADO COM SUCESSO", "Cadastro feito com sucesso"));
+			PrimeFaces.current().ajax().update("idformLogin:growl");
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO AO CADASTRAR", "Sala inexistente"));
@@ -97,9 +100,15 @@ public class Iu01_00MBean {
 		if (resp.size() > 0) {
 			UsuarioLogado.getInstance().setUsuario(resp.get(0));
 			FacesContext.getCurrentInstance().getExternalContext().redirect("iu01_tarefa.jsf");
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "LOGIN EFETUADO COM SUCESSO", "Login feito com sucesso"));
+			PrimeFaces.current().ajax().update("idformLogin:growl");
 		} else if (crianca.size() > 0) {
 			UsuarioLogado.getInstance().setUsuario(crianca.get(0));
 			FacesContext.getCurrentInstance().getExternalContext().redirect("iu01_tarefa.jsf");
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "LOGIN EFETUADO COM SUCESSO", "Login feito com sucesso"));
+			PrimeFaces.current().ajax().update("idformLogin:growl");
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"ERRO AO LOGAR", "Verifique se o email/senha estão corretos"));

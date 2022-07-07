@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+
+import org.primefaces.PrimeFaces;
 
 import modelo.dao.ManterRecompensa;
 import modelo.dao.ManterTarefa;
@@ -35,6 +39,9 @@ public class Iu01_criarRecompensaMBean {
 	public void onSalvarRecompensa() {
 		ManterRecompensa manterRecompensa = new ManterRecompensa();
 		manterRecompensa.salvarRecompensa(recompensa, crianca);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"RECOMPENSA CRIADA COM SUCESSO", "Recompensa criada"));
+		PrimeFaces.current().ajax().update("idform:growl");
 	}
 
 	public Recompensa getRecompensa() {

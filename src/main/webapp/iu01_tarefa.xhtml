@@ -28,24 +28,18 @@ body {
 <h:body>
 	<h:form id="idform">
 		<p:menubar>
-			<f:facet name="crianca">
-				<div class="koin">
-					<p:outputLabel value="#{iu01_tarefaMBean.crianca.koin}" />
-				</div>
-			</f:facet>
-			<p:menuitem value="TAREFAS" icon="pi pi-fw pi-trash" />
-			<p:menuitem value="RECOMPENSAS" icon="pi pi-fw pi-trash" />
+			<p:menuitem value="TAREFAS" icon="pi pi-fw pi-trash" url="iu01_tarefa.jsf"/>
+			<p:menuitem value="RECOMPENSAS" icon="pi pi-fw pi-trash" url="iu01_recompensa.jsf" />
 			<p:menuitem value="CRIAR TAREFA"
 				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
 				url="iu01_criarTarefa.jsf" />
-			<p:menuitem value="CRIAR RECOMPENSA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
-				url="iu01_criarRecompensa.jsf" />
-
 			<f:facet name="options">
 				<p:button value="Logout" icon="pi pi-fw pi-sign-out"
 					styleClass="ui-button-info" />
 			</f:facet>
+			<p:menuitem value="CRIAR RECOMPENSA"
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
+				url="iu01_criarRecompensa.jsf" />
 		</p:menubar>
 
 		<h:panelGroup id="alvs">

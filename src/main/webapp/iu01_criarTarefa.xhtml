@@ -27,8 +27,8 @@ body {
 	<h:form id="idformLogin">
 		<p:growl id="growl" sticky="true" showDetail="true" />
 		<p:menubar>
-			<p:menuitem value="TAREFAS" icon="pi pi-fw pi-trash" />
-			<p:menuitem value="RECOMPENSAS" icon="pi pi-fw pi-trash" url="iu01_criarRecompensa.jsf" />
+			<p:menuitem value="TAREFAS" icon="pi pi-fw pi-trash" url="iu01_tarefa.jsf"/>
+			<p:menuitem value="RECOMPENSAS" icon="pi pi-fw pi-trash" url="iu01_recompensa.jsf" />
 			<p:menuitem value="CRIAR TAREFA"
 				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
 				url="iu01_criarTarefa.jsf" />
@@ -37,7 +37,8 @@ body {
 					styleClass="ui-button-info" />
 			</f:facet>
 			<p:menuitem value="CRIAR RECOMPENSA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}" />
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
+				url="iu01_criarRecompensa.jsf" />
 		</p:menubar>
 		<div>
 			<h:panelGrid columns="1" columnClasses="label, value">
