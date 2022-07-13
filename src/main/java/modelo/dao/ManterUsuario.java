@@ -87,5 +87,16 @@ public class ManterUsuario {
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 		return entityManager.find(Crianca.class, id);
+		
+	}
+
+	public void atualizaCrianca(Double koin, Crianca crianca) {
+		EntityManager entityManager = Factory.getEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		String sql = "UPDATE Crianca as t SET koin = :pKoin where t.id = :pId";
+		entityManager.createQuery(sql).setParameter("pId", crianca.getId()).setParameter("pKoin", koin + crianca.getKoin()).executeUpdate();
+		entityTransaction.commit();
+		entityManager.close();
 	}
 }

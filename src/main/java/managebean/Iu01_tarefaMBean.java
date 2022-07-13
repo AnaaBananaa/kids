@@ -2,8 +2,12 @@ package managebean;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.PrimeFaces;
 
 import modelo.dao.ManterTarefa;
 import modelo.dao.ManterUsuario;
@@ -38,11 +42,21 @@ public class Iu01_tarefaMBean {
 	}
 
 	public List<Tarefa> retornaTarefa() {
+		ManterTarefa mt = new ManterTarefa();
 		if (!pertenceResponsavel()) {
-			ManterTarefa mt = new ManterTarefa();
 			return mt.onBuscarTarefas();
 		} else
-			return null;
+			return mt.onBuscarTarefasEspecificas();
+	}
+	
+	public void validaTarefa(Tarefa tarefa) {
+		ManterTarefa mt = new ManterTarefa();
+		ManterUsuario mu = new ManterUsuario();
+		mu.atualizaCrianca(tarefa.getKoin(), tarefa.getCrianca());
+		mt.removerTarefa(tarefa);
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "VALIDAÇÃO FEITA COM SUCESSO", "Os koins foram enviados para a criança"));
+		PrimeFaces.current().ajax().update("idform:growl");
 	}
 
 	public void mudarStatus(Tarefa tarefa) {

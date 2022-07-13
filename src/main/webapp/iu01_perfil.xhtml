@@ -11,6 +11,12 @@ body {
 	background-color: #4ECDC4;
 	margin: 0px;
 }
+
+.perfil {
+	background-color: white;
+	margin: 20px;
+	padding: 5px;
+}
 </style>
 	<title>Bem-Vindo ao Kid$</title>
 </h:head>
@@ -21,41 +27,35 @@ body {
 			<p:menuitem value="TAREFAS" icon="pi pi-fw pi-trash"
 				url="iu01_tarefa.jsf" />
 			<p:menuitem value="RECOMPENSAS" icon="pi pi-fw pi-trash"
-				url="iu01_recompesa.jsf" />
+				url="iu01_recompensa.jsf" />
 			<p:menuitem value="CRIAR TAREFA"
 				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
 				url="iu01_criarTarefa.jsf" />
-			<p:menuitem value="CRIAR RECOMPENSA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}" />
-			<p:menuitem value="AVALIAR TAREFA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
-				url="iu01_avaliarTarefa.jsf" />
-			<p:menuitem value="PERFIL" url="iu01_perfil.jsf" />
 			<f:facet name="options">
 				<p:button value="Logout" icon="pi pi-fw pi-sign-out"
 					styleClass="ui-button-info" url="iu01_00.jsf" />
 			</f:facet>
+			<p:menuitem value="CRIAR RECOMPENSA"
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
+				url="iu01_criarRecompensa.jsf" />
+			<p:menuitem value="AVALIAR TAREFA"
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
+				url="iu01_avaliarTarefa.jsf" />
+			<p:menuitem value="PERFIL"
+				url="iu01_perfil.jsf" />
 		</p:menubar>
 
-		<p:outputLabel value="NOME" for="nome" />
-		<p:inputText id="nome"
-			value="#{iu01_criarRecompensaMBean.recompensa.nomeRecompensa}" />
-
-		<p:outputLabel value="DESCRICAO" for="dsc" />
-		<p:inputText id="dsc"
-			value="#{iu01_criarRecompensaMBean.recompensa.descricao}" />
-
-		<p:selectOneMenu id="group"
-			value="#{iu01_criarRecompensaMBean.crianca}">
-			<f:selectItems value="#{iu01_criarRecompensaMBean.listaCombo}" />
-		</p:selectOneMenu>
-
-		<p:outputLabel value="CUSTO" for="custo" />
-		<p:inputText id="custo"
-			value="#{iu01_criarRecompensaMBean.recompensa.preco}" />
-
-		<p:commandButton value="CRIAR RECOMPENSA" id="tarefa"
-			action="#{iu01_criarRecompensaMBean.onSalvarRecompensa()}" />
+		<div id="perfil">
+			<p:outputLabel value="Nome" for="nome" />
+			<p:inputText id="nome" value="#{iu01_perfilMBean.user.nome}" />
+			<p:outputLabel value="Email" for="email" />
+			<p:inputText id="email" value="#{iu01_perfilMBean.user.email}" />
+			<p:outputLabel value="Sala" for="sala" />
+			<p:inputText id="sala" value="#{iu01_perfilMBean.user.salas}" />
+			<p:outputLabel value="Koin" for="koin" rendered="#{!iu01_tarefaMBean.pertenceResponsavel()}" />
+			<p:inputText id="koin" value="#{iu01_perfilMBean.user.koin}" 
+				rendered="#{!iu01_tarefaMBean.pertenceResponsavel()}" />
+		</div>
 
 	</h:form>
 </h:body>
