@@ -1,0 +1,62 @@
+@charset "ISO-8859-1";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600');
+
+.crud-panel{
+	position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+   	margin: auto;
+   	
+
+	width: 50vw; 
+	height: 70vh;
+	min-height: 360px;
+	background: white;
+    padding: 20px;
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.crud-panel h1{
+	color: #FF6B6B;
+	font-weight: 600;
+}
+
+.crud-panel .row{
+	width: 75%;
+	display: flex;
+    justify-content: center;
+    font-weight: 600 !important;
+}
+
+.ui-float-label{
+	width: 100% !important;
+}
+
+.row .input{
+	width: 100%;
+	color: #858585;
+    border-color: #BEBEBE;
+    background: #F0F0F0;
+	
+}
+
+.row .field{
+	width: 90%;
+	    color: #858585;
+    border-color: #BEBEBE;
+    background: #F0F0F0;
+}
+
+.button{
+	background: #FFD60A !important;
+	border-color: #FFD60A !important;
+}
