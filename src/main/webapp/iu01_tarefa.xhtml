@@ -4,7 +4,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:menu="http://java.sun.com/jsf/composite/menu">
 <h:head>
 	<style>
 body {
@@ -28,30 +29,9 @@ body {
 <h:body>
 	<h:form id="idform">
 		<p:growl id="growl" sticky="true" showDetail="true" />
-		<p:menubar>
-			<p:menuitem value="TAREFAS" icon="pi pi-fw pi-trash"
-				url="iu01_tarefa.jsf" />
-			<p:menuitem value="RECOMPENSAS" icon="pi pi-fw pi-trash"
-				url="iu01_recompensa.jsf" />
-			<p:menuitem value="CRIAR TAREFA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
-				url="iu01_criarTarefa.jsf" />
-			<f:facet name="options">
-				<p:button value="Logout" icon="pi pi-fw pi-sign-out"
-					styleClass="ui-button-info" url="iu01_00.jsf" />
-			</f:facet>
-			<p:menuitem value="CRIAR RECOMPENSA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
-				url="iu01_criarRecompensa.jsf" />
-			<p:menuitem value="AVALIAR TAREFA"
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
-				url="iu01_avaliarTarefa.jsf" />
-			<p:menuitem value="PERFIL"
-				url="iu01_perfil.jsf" />
-		</p:menubar>
+		<menu:menu />
 
-		<h:panelGroup id="alvs2"
-			rendered="#{iu01_tarefaMBean.pertenceResponsavel()}">
+		<h:panelGroup id="alvs2">
 			<p:repeat value="#{iu01_tarefaMBean.retornaTarefa()}" var="tarefa">
 				<div class="tarefa">
 					<p:outputLabel value="#{tarefa.nomeTarefa}" />
@@ -60,7 +40,13 @@ body {
 					<p:commandButton value="#{tarefa.status}"
 						action="#{iu01_tarefaMBean.mudarStatus(tarefa)}"
 						update="idform:alvs2"
-						disabled="#{iu01_tarefaMBean.desabilitaBotao(tarefa)}" />
+						disabled="#{iu01_tarefaMBean.desabilitaBotao(tarefa)}"
+						rendered="#{iu01_tarefaMBean.pertenceResponsavel() == false}" />
+
+					<p:commandButton value="" icon="pi pi-fw pi-trash"
+						action="#{iu01_tarefaMBean.reprovaTarefa(tarefa)}"
+						rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
+						update="idform:alvs2" />
 				</div>
 			</p:repeat>
 		</h:panelGroup>

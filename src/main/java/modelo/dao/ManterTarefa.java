@@ -70,7 +70,7 @@ public class ManterTarefa {
 		EntityManager entityManager = Factory.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
-		String status = "Aguardando Avaliação";
+		String status = "Disponível";
 		String sql = "SELECT c FROM Tarefa c where status = :pStatus";
 		List<Tarefa> tarefa = entityManager.createQuery(sql).setParameter("pStatus", status).getResultList();
 		entityTransaction.commit();

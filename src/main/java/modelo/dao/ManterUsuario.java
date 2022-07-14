@@ -6,9 +6,6 @@ import java.util.Random;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
-
-import org.hibernate.cfg.annotations.QueryBinder;
 
 import factory.Factory;
 import modelo.entity.Crianca;
@@ -65,6 +62,7 @@ public class ManterUsuario {
 		entityTransaction.begin();
 		String jpqlCrianca = "SELECT c FROM Crianca c where c.email = :pEmail and c.senha = :pSenha";
 		List<Crianca> crianca = entityManager.createQuery(jpqlCrianca).setParameter("pEmail", email).setParameter("pSenha", senha).getResultList();
+		entityTransaction.commit();
 		entityManager.close();
 		return crianca;
 	}
@@ -75,6 +73,7 @@ public class ManterUsuario {
 		entityTransaction.begin();
 		String sql = "SELECT s FROM Sala s where s.token = :pToken";
 		List<Sala> sala = entityManager.createQuery(sql).setParameter("pToken", token).getResultList();
+		entityTransaction.commit();
 		entityManager.close();
 		if(!sala.isEmpty()) {
 			return sala.get(0);
@@ -86,8 +85,10 @@ public class ManterUsuario {
 		EntityManager entityManager = Factory.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
-		return entityManager.find(Crianca.class, id);
-		
+		Crianca c = entityManager.find(Crianca.class, id);
+		entityTransaction.commit();
+		entityManager.close();
+		return c;
 	}
 
 	public void atualizaCrianca(Double koin, Crianca crianca) {

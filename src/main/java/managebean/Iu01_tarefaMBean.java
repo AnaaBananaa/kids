@@ -58,6 +58,14 @@ public class Iu01_tarefaMBean {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "VALIDAÇÃO FEITA COM SUCESSO", "Os koins foram enviados para a criança"));
 		PrimeFaces.current().ajax().update("idform:growl");
 	}
+	
+	public void reprovaTarefa(Tarefa tarefa) {
+		ManterTarefa mt = new ManterTarefa();
+		mt.removerTarefa(tarefa);
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "REMOÇÃO FEITA COM SUCESSO", ""));
+		PrimeFaces.current().ajax().update("idform:growl");
+	}
 
 	public void mudarStatus(Tarefa tarefa) {
 		ManterTarefa mt = new ManterTarefa();

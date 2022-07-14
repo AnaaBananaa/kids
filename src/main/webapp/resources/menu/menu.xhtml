@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<composite:interface>
+
+	</composite:interface>
+	<composite:implementation>
+		<p:menubar>
+			<p:menuitem value="TAREFAS" url="iu01_tarefa.jsf" />
+			<p:menuitem value="RECOMPENSAS"
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel() == false}"
+				url="iu01_recompensa.jsf" />
+			<p:menuitem value="CRIAR TAREFA"
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
+				url="iu01_criarTarefa.jsf" />
+			<p:menuitem value="CRIAR RECOMPENSA"
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
+				url="iu01_criarRecompensa.jsf" />
+			<p:menuitem value="AVALIAR TAREFA"
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
+				url="iu01_avaliarTarefa.jsf" />
+			<p:menuitem value="PERFIL" url="iu01_perfil.jsf" />
+			<f:facet name="options">
+				<p:button value="Logout" icon="pi pi-fw pi-sign-out"
+					styleClass="ui-button-info" url="iu01_00.jsf" />
+			</f:facet>
+		</p:menubar>
+	</composite:implementation>
+</h:body>
+</html>
