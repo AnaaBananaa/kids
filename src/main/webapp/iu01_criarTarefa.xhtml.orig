@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:menu="http://java.sun.com/jsf/composite/menu">
+<h:head>
+	<link rel="stylesheet" href="crud.css"></link>
+	<style>
+
+body {
+	background-color: #4ECDC4;
+	margin: 0px;
+}
+
+.margin {
+	margin-top: 10px;
+	margin-left: 40px;
+}
+
+.ui-wizard-content {
+	margin-left: 100px;
+}
+</style>
+	<title>Bem-Vindo ao Kid$</title>
+</h:head>
+<h:body>
+	<h:form id="idformLogin">
+		<p:growl id="growl" sticky="true" showDetail="true" />
+<<<<<<< HEAD
+		<menu:menu/>
+		<div>
+			<h:panelGrid columns="1" columnClasses="label, value">
+				<div>
+					<p:outputLabel value="NOME" for="nome" />
+					<p:inputText id="nome"
+=======
+		<p:menubar>
+			<p:menuitem value="TAREFAS" icon="pi pi-fw pi-trash"
+				url="iu01_tarefa.jsf" />
+			<p:menuitem value="RECOMPENSAS" icon="pi pi-fw pi-trash"
+				url="iu01_recompensa.jsf" />
+			<p:menuitem value="CRIAR TAREFA"
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
+				url="iu01_criarTarefa.jsf" />
+			<f:facet name="options">
+				<p:button value="Logout" icon="pi pi-fw pi-sign-out"
+					styleClass="ui-button-info" url="iu01_00.jsf" />
+			</f:facet>
+			<p:menuitem value="CRIAR RECOMPENSA"
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
+				url="iu01_criarRecompensa.jsf" />
+			<p:menuitem value="AVALIAR TAREFA"
+				rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
+				url="iu01_avaliarTarefa.jsf" />
+			<p:menuitem value="PERFIL"
+				url="iu01_perfil.jsf" />
+		</p:menubar>
+		<div class="crud-panel">
+				<h1>Criar nova tarefa</h1>
+				<div class="row">
+					<span class="ui-float-label">	
+					<p:inputText id="nome" class="input"
+>>>>>>> feature/finalizacao/frontend
+						value="#{iu01_criarTarefaMBean.tarefa.nomeTarefa}" />
+						<p:outputLabel value="NOME" for="@previous" />
+					</span>
+				</div>
+
+				<div class="row">
+					<span class="ui-float-label">	
+					<p:inputTextarea rows="5" cols="35"  id="dsc" class="input"
+						value="#{iu01_criarTarefaMBean.tarefa.dscTarefa}" />
+					<p:outputLabel value="DESCRICAO" for="@previous" />
+					</span>
+				</div>
+
+				<div class="row">
+				<span class="ui-float-label">	
+					<p:inputText id="custo" class="field" 
+					value="#{iu01_criarTarefaMBean.tarefa.koin}" />
+					<p:outputLabel value="CUSTO" for="@previous" />
+					</span>
+				
+					<p:selectOneMenu id="group" class="field"
+						value="#{iu01_criarTarefaMBean.crianca}">
+						<f:selectItems value="#{iu01_criarTarefaMBean.listaCombo}" />
+					</p:selectOneMenu>
+				</div>
+
+			<p:commandButton value="CADASTRAR TAREFA" id="entrar" class="button"
+				action="#{iu01_criarTarefaMBean.onSalvarTarefa}" />
+		</div>
+	</h:form>
+</h:body>
+</html>
