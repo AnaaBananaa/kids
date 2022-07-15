@@ -7,17 +7,26 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:menu="http://java.sun.com/jsf/composite/menu">
 <h:head>
+	<link rel="stylesheet" href="listas.css"></link>
 	<style>
-body {
-	background-color: #4ECDC4;
-	margin: 0px;
+	
+.close{
+	background: #FF6B6B !important;
+	position: absolute;
+	top: 7.5px;
+	right: 7.5px;
+	height: 35px;
+    width: 35px;
+    border-color: #FF6B6B !important;
 }
 
-.tarefa {
-	background-color: white;
-	margin: 20px;
-	width: 80em;
-	padding: 5px;
+.botao_status{
+    position: absolute;
+    bottom: 10px;
+    right: 25px;
+    background: #FFD60A !important;
+	color: #fff !important;
+	border: none !important;
 }
 
 .koin {
@@ -30,24 +39,24 @@ body {
 	<h:form id="idform">
 		<p:growl id="growl" sticky="true" showDetail="true" />
 		<menu:menu />
-
 		<h:panelGroup id="alvs2">
 			<p:repeat value="#{iu01_tarefaMBean.retornaTarefa()}" var="tarefa">
 				<div class="tarefa">
-					<p:outputLabel value="#{tarefa.nomeTarefa}" />
-					<p:outputLabel value="#{tarefa.dscTarefa}" />
-					<p:outputLabel value="#{tarefa.koin}" />
-					<p:commandButton value="#{tarefa.status}"
+					<p:outputLabel value="#{tarefa.nomeTarefa}"  class="texto titulo"/>
+					<p:outputLabel value="K$ #{tarefa.koin} "  class="texto recompensa"/>
+					<p:outputLabel value="#{tarefa.dscTarefa}"  class="descricao" />
+					<p:commandButton value="#{tarefa.status}" class="botao_status"
 						action="#{iu01_tarefaMBean.mudarStatus(tarefa)}"
 						update="idform:alvs2"
 						disabled="#{iu01_tarefaMBean.desabilitaBotao(tarefa)}"
 						rendered="#{iu01_tarefaMBean.pertenceResponsavel() == false}" />
 
-					<p:commandButton value="" icon="pi pi-fw pi-trash"
+					<p:commandButton value="" icon="pi pi-times" class="close"
 						action="#{iu01_tarefaMBean.reprovaTarefa(tarefa)}"
 						rendered="#{iu01_tarefaMBean.pertenceResponsavel()}"
-						update="idform:alvs2" />
+						update="idform:alvs2"/>
 				</div>
+				
 			</p:repeat>
 		</h:panelGroup>
 

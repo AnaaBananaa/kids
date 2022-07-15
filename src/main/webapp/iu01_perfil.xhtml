@@ -7,37 +7,40 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:menu="http://java.sun.com/jsf/composite/menu">
 <h:head>
+	<link rel="stylesheet" href="perfil.css"></link>
 	<style>
-body {
-	background-color: #4ECDC4;
-	margin: 0px;
-}
-
-.perfil {
-	background-color: white;
-	margin: 20px;
-	padding: 5px;
-}
 </style>
 	<title>Bem-Vindo ao Kid$</title>
 </h:head>
 <h:body>
 	<h:form id="idform">
 		<p:growl id="growl" sticky="true" showDetail="true" />
-		<menu:menu/>
+		<menu:menu />
+		<div class="panel">
+			<img src="images/login-logo.png" style="width: 180px" />
+		
+			<div class="row">
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" value="#{iu01_perfilMBean.user.nome}" class="field"/>
+			</div>
 
-		<div id="perfil">
-			<p:outputLabel value="Nome" for="nome" />
-			<p:inputText id="nome" value="#{iu01_perfilMBean.user.nome}" />
-			<p:outputLabel value="Email" for="email" />
-			<p:inputText id="email" value="#{iu01_perfilMBean.user.email}" />
-			<p:outputLabel value="Sala" for="sala" />
-			<p:inputText id="sala" value="#{iu01_perfilMBean.user.salas}" />
-			<p:outputLabel value="Koin" for="koin" rendered="#{iu01_tarefaMBean.pertenceResponsavel() == false}" />
-			<p:inputText id="koin" value="#{iu01_perfilMBean.user.koin}" 
-				rendered="#{iu01_tarefaMBean.pertenceResponsavel() == false}" />
+			<div class="row">
+				<p:outputLabel value="Email" for="email" />
+				<p:inputText id="email" value="#{iu01_perfilMBean.user.email}" class="field"/>
+			</div>
+
+			<div class="row">
+				<p:outputLabel value="Sala" for="sala" />
+				<p:inputText id="sala" value="#{iu01_perfilMBean.user.salas}" class="field"/>
+			</div>
+
+			<div class="row">
+				<p:outputLabel value="Koin" for="koin" 
+					rendered="#{iu01_tarefaMBean.pertenceResponsavel() == false}" />
+				<p:inputText id="koin" value="#{iu01_perfilMBean.user.koin}" class="field"
+					rendered="#{iu01_tarefaMBean.pertenceResponsavel() == false}" />
+			</div>
 		</div>
-
 	</h:form>
 </h:body>
 </html>

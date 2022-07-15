@@ -7,17 +7,17 @@
 	xmlns:p="http://primefaces.org/ui" 
 	xmlns:menu="http://java.sun.com/jsf/composite/menu">
 <h:head>
+	<link rel="stylesheet" href="listas.css"></link>
 	<style>
-body {
-	background-color: #4ECDC4;
-	margin: 0px;
-}
+	
 
-.recompensa {
-	background-color: white;
-	margin: 20px;
-	width: 80em;
-	padding: 5px;
+.botao_recompensa{
+    position: absolute;
+    bottom: 10px;
+    right: 25px;
+    background: #FFD60A !important;
+	color: #fff !important;
+	border: none !important;
 }
 </style>
 	<title>Bem-Vindo ao Kid$</title>
@@ -31,12 +31,12 @@ body {
 		<h:panelGroup id="alvs">
 			<p:repeat value="#{iu01_recompensaMBean.retornaRecompensa()}"
 				var="recompensa">
-				<div class="recompensa">
-					<p:outputLabel value="#{recompensa.nomeRecompensa}" />
-					<br />
-					<p:outputLabel value="#{recompensa.descricao}" />
-					<p:outputLabel value="#{recompensa.preco}" />
-					<p:commandButton value="RESGATAR"
+				<div class="tarefa">
+					<p:outputLabel value="#{recompensa.nomeRecompensa}" class="texto titulo"/>
+					<p:outputLabel value="#{recompensa.preco}" class="texto recompensa"/>
+					<p:outputLabel value="#{recompensa.descricao}" class="descricao"/>
+					
+					<p:commandButton value="Resgatar" class="botao_recompensa"
 						action="#{iu01_recompensaMBean.resgate(recompensa)}"
 						update="idform:alvs" />
 				</div>

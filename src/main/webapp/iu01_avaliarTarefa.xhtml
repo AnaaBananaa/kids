@@ -7,19 +7,35 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:menu="http://java.sun.com/jsf/composite/menu">
 <h:head>
-	<style>
-body {
-	background-color: #4ECDC4;
-	margin: 0px;
+	<link rel="stylesheet" href="listas.css"></link>
+<style>
+
+.descricao{
+    padding-right: 0px;
+    width: 70%;
 }
 
-.tarefa {
-	background-color: white;
-	margin: 20px;
-	width: 80em;
-	padding: 5px;
+.botoes{
+	display: flex;
+    width: 22.5%;
+    position: absolute;
+    bottom: 10px;
+    right: 25px;
+    justify-content: space-between;
 }
 
+.aprovar{
+	background: #AFE89B !important;
+	color: #45603C !important;
+	border: none !important;
+}
+
+.reprovar{
+	background: #E89B9B !important;
+	color: #603C3C !important;
+	border: none !important;
+}
+	
 .koin {
 	background-color: #4ECDC4;
 }
@@ -29,21 +45,23 @@ body {
 <h:body>
 	<h:form id="idform">
 		<p:growl id="growl" sticky="true" showDetail="true" />
-		<menu:menu/>
+		<menu:menu />
 
 		<h:panelGroup id="alvs2">
 			<p:repeat value="#{iu01_tarefaMBean.retornaTarefa()}" var="tarefa">
 				<div class="tarefa">
-					<p:outputLabel value="#{tarefa.nomeTarefa}" />
-					<p:outputLabel value="#{tarefa.dscTarefa}" />
-					<p:outputLabel value="#{tarefa.koin}" />
+					<p:outputLabel value="#{tarefa.nomeTarefa}" class="texto titulo" />
+					<p:outputLabel value="K$ #{tarefa.koin}" class="texto recompensa" />
+					<p:outputLabel value="#{tarefa.dscTarefa}" class="descricao" />
 
-					<p:commandButton value="VALIDAR TAREFA"
-						action="#{iu01_tarefaMBean.validaTarefa(tarefa)}"
-						update="idform:alvs2" />
-					<p:commandButton value="REPROVAR TAREFA"
-						action="#{iu01_tarefaMBean.reprovaTarefa(tarefa)}"
-						update="idform:alvs2" />
+					<div class="botoes">
+						<p:commandButton value="Validar Tarefa" class="aprovar"
+							action="#{iu01_tarefaMBean.validaTarefa(tarefa)}"
+							update="idform:alvs2" />
+						<p:commandButton value="Reprovar tarefa" class="reprovar"
+							action="#{iu01_tarefaMBean.reprovaTarefa(tarefa)}"
+							update="idform:alvs2" />
+					</div>
 				</div>
 			</p:repeat>
 		</h:panelGroup>
