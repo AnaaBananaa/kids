@@ -52,6 +52,8 @@ public class Iu01_recompensaMBean {
 	public void resgate(Recompensa rec) {
 		if (rec.getPreco() <= crianca.getKoin()) {
 			crianca.setKoin(crianca.getKoin() - rec.getPreco());
+			ManterUsuario mu = new ManterUsuario();
+			mu.atualizaCriancaPreco(crianca);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"RESGATE EFETUADO COM SUCESSO", "Avise seu responsável que resgatou a recompensa"));
 			PrimeFaces.current().ajax().update("idform:growl");

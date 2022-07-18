@@ -8,34 +8,32 @@
 	xmlns:menu="http://java.sun.com/jsf/composite/menu">
 <h:head>
 	<link rel="stylesheet" href="listas.css"></link>
-<style>
-
-.descricao{
-    padding-right: 0px;
-    width: 70%;
+	<style>
+.descricao {
+	padding-right: 0px;
+	width: 70%;
 }
 
-.botoes{
+.botoes {
 	display: flex;
-    width: 22.5%;
-    position: absolute;
-    bottom: 10px;
-    right: 25px;
-    justify-content: space-between;
+	width: 20%;
+	position: absolute;
+	bottom: 10px;
+	right: 25px;
+	justify-content: space-between;
 }
 
-.aprovar{
+.aprovar {
 	background: #AFE89B !important;
-	color: #45603C !important;
-	border: none !important;
+    border-color: #AFE89B !important;
 }
 
-.reprovar{
-	background: #E89B9B !important;
-	color: #603C3C !important;
-	border: none !important;
+.reprovar {
+	background: #FF6B6B !important;
+	text-align:center !important;
+    border-color: #FF6B6B !important;
 }
-	
+
 .koin {
 	background-color: #4ECDC4;
 }
@@ -48,17 +46,18 @@
 		<menu:menu />
 
 		<h:panelGroup id="alvs2">
-			<p:repeat value="#{iu01_tarefaMBean.retornaTarefa()}" var="tarefa">
+			<p:repeat value="#{iu01_tarefaMBean.retornaAvaliacoes()}"
+				var="tarefa">
 				<div class="tarefa">
 					<p:outputLabel value="#{tarefa.nomeTarefa}" class="texto titulo" />
 					<p:outputLabel value="K$ #{tarefa.koin}" class="texto recompensa" />
 					<p:outputLabel value="#{tarefa.dscTarefa}" class="descricao" />
 
 					<div class="botoes">
-						<p:commandButton value="Validar Tarefa" class="aprovar"
+						<p:commandButton value="Aprovar" icon="pi pi-check" class="aprovar"
 							action="#{iu01_tarefaMBean.validaTarefa(tarefa)}"
 							update="idform:alvs2" />
-						<p:commandButton value="Reprovar tarefa" class="reprovar"
+						<p:commandButton value="Reprovar" icon="pi pi-times" class="reprovar"
 							action="#{iu01_tarefaMBean.reprovaTarefa(tarefa)}"
 							update="idform:alvs2" />
 					</div>

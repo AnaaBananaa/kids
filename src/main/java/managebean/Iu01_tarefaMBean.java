@@ -49,6 +49,11 @@ public class Iu01_tarefaMBean {
 			return mt.onBuscarTarefasEspecificas();
 	}
 	
+	public List<Tarefa> retornaAvaliacoes(){
+		ManterTarefa mt = new ManterTarefa();
+		return mt.onBuscarTarefasAvaliacao();
+	}
+	
 	public void validaTarefa(Tarefa tarefa) {
 		ManterTarefa mt = new ManterTarefa();
 		ManterUsuario mu = new ManterUsuario();

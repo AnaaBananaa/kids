@@ -7,7 +7,6 @@ import javax.persistence.EntityTransaction;
 
 import factory.Factory;
 import modelo.entity.Crianca;
-import modelo.entity.Sala;
 import modelo.entity.Tarefa;
 import modelo.entity.UsuarioLogado;
 
@@ -48,6 +47,18 @@ public class ManterTarefa {
 		entityManager.close();
 		return tarefa;
 	}
+	
+	public List<Tarefa> onBuscarTarefasAvaliacao() {
+		EntityManager entityManager = Factory.getEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		String status = "Aguardando Avaliação";
+		String sql = "SELECT c FROM Tarefa c where status = :pStatus and sala = :Sala";
+		List<Tarefa> tarefa = entityManager.createQuery(sql).setParameter("pStatus", status).setParameter("Sala", UsuarioLogado.getInstance().getUsuario().getSalas().get(0)).getResultList();
+		entityTransaction.commit();
+		entityManager.close();
+		return tarefa;
+	}
 
 	public void atualizaStatus(Tarefa tarefa) {
 		EntityManager entityManager = Factory.getEntityManager();
@@ -71,8 +82,8 @@ public class ManterTarefa {
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 		String status = "Disponível";
-		String sql = "SELECT c FROM Tarefa c where status = :pStatus";
-		List<Tarefa> tarefa = entityManager.createQuery(sql).setParameter("pStatus", status).getResultList();
+		String sql = "SELECT c FROM Tarefa c where status = :pStatus and sala = :Sala";
+		List<Tarefa> tarefa = entityManager.createQuery(sql).setParameter("pStatus", status).setParameter("Sala", UsuarioLogado.getInstance().getUsuario().getSalas().get(0)).getResultList();
 		entityTransaction.commit();
 		entityManager.close();
 		return tarefa;
