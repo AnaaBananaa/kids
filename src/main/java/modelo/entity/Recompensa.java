@@ -74,6 +74,8 @@ public class Recompensa implements Serializable  {
 			return false;
 		return true;
 	}
+	
+	
 	public double getPreco() {
 		return preco;
 	}

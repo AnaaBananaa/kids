@@ -2,12 +2,9 @@ package managebean;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -33,8 +30,8 @@ public class Iu01_00MBean {
 	private Usuario user = new Usuario();
 	private boolean skip;
 	private boolean cadastro;
-	private List<Responsavel> resp;
-	private List<Crianca> crianca;
+	private Responsavel resp;
+	private Crianca crianca;
 	private String sala;
 	private int Resp = 2;
 
@@ -97,14 +94,14 @@ public class Iu01_00MBean {
 	}
 
 	public void validaPagina() throws Exception {
-		if (resp.size() > 0) {
-			UsuarioLogado.getInstance().setUsuario(resp.get(0));
+		if (resp != null) {
+			UsuarioLogado.getInstance().setUsuario(resp);
 			FacesContext.getCurrentInstance().getExternalContext().redirect("iu01_tarefa.jsf");
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "LOGIN EFETUADO COM SUCESSO", "Login feito com sucesso"));
 			PrimeFaces.current().ajax().update("idformLogin:growl");
-		} else if (crianca.size() > 0) {
-			UsuarioLogado.getInstance().setUsuario(crianca.get(0));
+		} else if (crianca != null) {
+			UsuarioLogado.getInstance().setUsuario(crianca);
 			FacesContext.getCurrentInstance().getExternalContext().redirect("iu01_tarefa.jsf");
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "LOGIN EFETUADO COM SUCESSO", "Login feito com sucesso"));

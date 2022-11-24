@@ -50,7 +50,7 @@ public class Iu01_recompensaMBean {
 	}
 
 	public void resgate(Recompensa rec) {
-		if (rec.getPreco() <= crianca.getKoin()) {
+		if (validaPreco(rec, crianca.getKoin())) {
 			crianca.setKoin(crianca.getKoin() - rec.getPreco());
 			ManterUsuario mu = new ManterUsuario();
 			mu.atualizaCriancaPreco(crianca);
@@ -63,6 +63,14 @@ public class Iu01_recompensaMBean {
 			PrimeFaces.current().ajax().update("idform:growl");
 		}
 
+	}
+	
+	public boolean validaPreco(Recompensa rec, Double koin) {
+		if(rec.getPreco() <= koin) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	public Crianca getCrianca() {

@@ -45,7 +45,7 @@ public class ManterUsuario {
 		entityManager.close();
 	}
 
-	public List<Responsavel> onBuscarResp(String email, String senha) {
+	public Responsavel onBuscarResp(String email, String senha) {
 		EntityManager entityManager = Factory.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
@@ -53,10 +53,10 @@ public class ManterUsuario {
 		String jpql = "SELECT r FROM Responsavel r where r.email = :pEmail and r.senha = :pSenha";
 		List<Responsavel> resp = entityManager.createQuery(jpql).setParameter("pEmail", email).setParameter("pSenha", senha).getResultList();
 		entityManager.close();
-		return resp;
+		return resp.size() > 0 ? resp.get(0) : null;
 	}
 	
-	public List<Crianca> onBuscarCrianca(String email, String senha) {
+	public Crianca onBuscarCrianca(String email, String senha) {
 		EntityManager entityManager = Factory.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
@@ -64,7 +64,7 @@ public class ManterUsuario {
 		List<Crianca> crianca = entityManager.createQuery(jpqlCrianca).setParameter("pEmail", email).setParameter("pSenha", senha).getResultList();
 		entityTransaction.commit();
 		entityManager.close();
-		return crianca;
+		return crianca.size() > 0 ? crianca.get(0) : null;
 	}
 
 	public Sala onBuscarSala(String token) {
